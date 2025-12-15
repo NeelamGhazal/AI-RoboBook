@@ -151,14 +151,14 @@
 - [X] T054 [P] [US2] Create frontend/docs/module2/chapter1.md with Physics Simulation Fundamentals content (rigid body dynamics, collision detection, sensor simulation, learning objectives)
 - [X] T055 [P] [US2] Create frontend/docs/module2/chapter2.md with Gazebo Setup & Configuration content (installation, world files, plugin architecture, GUI overview)
 - [X] T056 [P] [US2] Create frontend/docs/module2/chapter3.md with URDF/SDF Formats content (comparison, when to use each, sensor definitions, actuator models)
-- [ ] T057 [P] [US2] Create docs/module2/chapter4.md with Unity Integration content (Unity-ROS 2 bridge, robotics simulation in Unity, advantages vs Gazebo)
-- [ ] T058 [US2] Create docs/module2/chapter5.md with Hands-on: Custom Environment (prerequisites, world file creation, sensor integration, robot spawning, ⏱️ 60 minutes badge)
+- [X] T057 [P] [US2] Create frontend/docs/module2/chapter4.md with Unity Integration content (Unity-ROS 2 bridge, robotics simulation in Unity, advantages vs Gazebo)
+- [X] T058 [US2] Create frontend/docs/module2/chapter5.md with Hands-on: Custom Environment (prerequisites, world file creation, sensor integration, robot spawning, ⏱️ 60 minutes badge)
 
 ### Module 2 Code Examples (Docker-tested)
 
-- [ ] T059 [P] [US2] Create examples/module2/chapter5/custom_world.sdf with Gazebo world file (ground plane, lighting, custom environment elements)
-- [ ] T060 [P] [US2] Create examples/module2/chapter5/spawn_robot.py with Python script to spawn URDF robot in Gazebo (ros2 service calls, coordinate specification)
-- [ ] T061 [P] [US2] Create examples/module2/chapter5/requirements.txt with gazebo-ros, rclpy dependencies
+- [X] T059 [P] [US2] Create frontend/examples/module2/chapter5/custom_world.sdf with Gazebo world file (ground plane, lighting, custom environment elements)
+- [X] T060 [P] [US2] Create frontend/examples/module2/chapter5/spawn_robot.py with Python script to spawn URDF robot in Gazebo (ros2 service calls, coordinate specification)
+- [X] T061 [P] [US2] Create frontend/examples/module2/chapter5/requirements.txt with gazebo-ros, rclpy dependencies
 - [ ] T062 [US2] Create examples/module2/chapter5/README.md with Gazebo setup, world launch, robot spawning instructions
 - [ ] T063 [US2] Test Module 2 examples in Docker container (verify Gazebo launches, world loads, robot spawns correctly)
 

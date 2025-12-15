@@ -1,0 +1,57 @@
+# Python dependencies for Module 2 - Gazebo Simulation Examples
+#
+# These packages are required to run the custom Gazebo environment
+# and robot spawning scripts.
+#
+# Installation:
+#   pip install -r requirements.txt
+#
+# Or using ROS 2 packages:
+#   sudo apt install ros-humble-gazebo-ros ros-humble-gazebo-ros-pkgs
+
+# Note: Most dependencies are ROS 2 packages, not pip packages
+# Install via apt on Ubuntu 22.04:
+
+# ROS 2 Humble Core
+# sudo apt install ros-humble-ros-base
+
+# Gazebo Integration
+# sudo apt install ros-humble-gazebo-ros
+# sudo apt install ros-humble-gazebo-ros-pkgs
+# sudo apt install ros-humble-gazebo-plugins
+
+# ROS 2 Python client library (typically pre-installed with ROS 2)
+# rclpy comes with ros-humble-ros-base
+
+# Geometry messages (for Pose, Twist, etc.)
+# sudo apt install ros-humble-geometry-msgs
+
+# Gazebo messages (for spawn/delete services)
+# sudo apt install ros-humble-gazebo-msgs
+
+# Optional: For visualization and debugging
+# sudo apt install ros-humble-rviz2
+# sudo apt install ros-humble-rqt
+# sudo apt install ros-humble-rqt-image-view
+
+# Optional: For navigation (if extending the examples)
+# sudo apt install ros-humble-navigation2
+# sudo apt install ros-humble-nav2-bringup
+
+# Python standard library (no pip install needed)
+# - os
+# - sys
+# - math
+
+# ============================================
+# Additional Python packages (if needed)
+# ============================================
+
+# For advanced mathematics (optional)
+# numpy>=1.21.0
+
+# For URDF/SDF parsing (optional)
+# lxml>=4.6.0
+
+# For configuration files (optional)
+# pyyaml>=5.4.0
