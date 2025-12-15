@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  robobook-ros2-humble:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: robobook-ros2-humble:latest
+    container_name: robobook-testing
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    network_mode: host

@@ -1,0 +1,99 @@
+# Build Validation Contract
+# Defines requirements for successful RoboBook Docusaurus build
+
+version: "1.0"
+name: "RoboBook Build Validation"
+description: "Validates build output meets FR requirements"
+
+validation_steps:
+  - name: "Build Time Check"
+    requirement: "FR-027"
+    test: "Build completes in <5 minutes"
+    command: "time npm run build"
+    success_criteria:
+      max_duration_seconds: 300
+    failure_action: "Optimize bundle, enable caching"
+
+  - name: "Internal Links Check"
+    requirement: "FR-028"
+    test: "All internal links return 200 status"
+    command: "npx broken-link-checker http://localhost:3000 --recursive"
+    success_criteria:
+      broken_links: 0
+    failure_action: "Fix broken links before deploy"
+
+  - name: "Page Size Check"
+    requirement: "FR-029"
+    test: "Page files <100KB"
+    command: "find build -name '*.html' -size +100k"
+    success_criteria:
+      files_over_limit: 0
+    failure_action: "Minify HTML, optimize inline styles"
+
+  - name: "Image Size Check"
+    requirement: "FR-030"
+    test: "Image assets <500KB"
+    command: "find static -type f \\( -name '*.png' -o -name '*.jpg' \\) -size +500k"
+    success_criteria:
+      files_over_limit: 0
+    failure_action: "Compress images, use WebP format"
+
+  - name: "Console Errors Check"
+    requirement: "FR-037"
+    test: "Zero console errors on page load"
+    tool: "Playwright or Puppeteer"
+    success_criteria:
+      console_errors: 0
+    failure_action: "Debug JavaScript errors"
+
+  - name: "Lighthouse Performance"
+    requirement: "FR-035"
+    test: "Performance score >90"
+    command: "lighthouse http://localhost:3000 --only-categories=performance"
+    success_criteria:
+      min_score: 90
+    failure_action: "Optimize images, enable compression, reduce JavaScript"
+
+  - name: "Lighthouse Accessibility"
+    requirement: "FR-036"
+    test: "Accessibility score >95"
+    command: "lighthouse http://localhost:3000 --only-categories=accessibility"
+    success_criteria:
+      min_score: 95
+    failure_action: "Add ARIA labels, improve contrast, fix heading hierarchy"
+
+  - name: "Mobile Usability"
+    requirement: "FR-038"
+    test: "Mobile usability 100/100"
+    tool: "Google PageSpeed Insights"
+    success_criteria:
+      mobile_score: 100
+    failure_action: "Fix tap targets, viewport configuration"
+
+  - name: "Code Example Docker Test"
+    requirement: "FR-007"
+    test: "All code examples tested in Docker"
+    command: "docker run --rm -v $(pwd)/examples:/workspace ros-humble-test pytest /workspace"
+    success_criteria:
+      all_tests_pass: true
+    failure_action: "Fix failing examples, update dependencies"
+
+deployment_gates:
+  - all_validation_steps_pass: true
+  - git_status_clean: true
+  - branch: "main"
+
+post_deployment_checks:
+  - name: "Live Site Accessibility"
+    test: "Site accessible via public URL within 24 hours"
+    requirement: "SC-024"
+    url: "https://{org}.github.io/{repo}"
+    expected_status: 200
+
+  - name: "Cross-Browser Compatibility"
+    requirement: "FR-039"
+    browsers:
+      - chrome: "latest 2 versions"
+      - firefox: "latest 2 versions"
+      - safari: "latest 2 versions"
+    test_suite: "Playwright cross-browser tests"
