@@ -51,3 +51,4 @@ i18n/*/docusaurus-plugin-content-docs/current.json
 
 # Git LFS
 # (Do NOT ignore *.png, *.jpg - those are tracked with LFS)
+.claude/settings.local.json
