@@ -1,0 +1,40 @@
+# Module 4: Voice Control and LLM Integration Requirements
+
+# Core Python packages
+python>=3.8
+
+# ROS 2 dependencies (for ROS 2 integration examples)
+rclpy>=3.0.0
+std_msgs>=3.0.0
+sensor_msgs>=3.0.0
+geometry_msgs>=3.0.0
+nav2_msgs>=1.0.0
+control_msgs>=4.0.0
+trajectory_msgs>=3.0.0
+action_msgs>=1.0.0
+
+# AI/ML Libraries
+openai>=1.0.0
+whisper==20231117
+torch>=2.0.0
+sentence-transformers>=2.2.0
+scikit-learn>=1.3.0
+numpy>=1.21.0
+spacy>=3.6.0
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.6.0/en_core_web_sm-3.6.0.tar.gz
+
+# Computer Vision
+opencv-python>=4.8.0
+mediapipe>=0.10.0
+cv-bridge>=3.0.0
+
+# Utilities
+requests>=2.31.0
+tqdm>=4.65.0
+matplotlib>=3.7.0
+pandas>=2.0.0
+
+# Development and Testing
+pytest>=7.4.0
+black>=23.7.0
+flake8>=6.0.0

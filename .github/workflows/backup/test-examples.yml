@@ -1,0 +1,39 @@
+name: Test Code Examples
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-examples:
+    name: Test ROS 2 code examples in Docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          cd examples
+          docker build -t robobook-ros2-humble .
+
+      - name: Test Module 1 examples
+        run: |
+          cd examples
+          docker run --rm robobook-ros2-humble pytest module1/ -v
+
+      - name: Test Module 2 examples
+        run: |
+          cd examples
+          docker run --rm robobook-ros2-humble pytest module2/ -v
+
+      - name: Test Module 3 examples
+        run: |
+          cd examples
+          docker run --rm robobook-ros2-humble pytest module3/ -v
+
+      - name: Test Module 4 examples
+        run: |
+          cd examples
+          docker run --rm robobook-ros2-humble pytest module4/ -v
