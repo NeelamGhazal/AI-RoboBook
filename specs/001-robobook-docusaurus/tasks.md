@@ -26,7 +26,7 @@
 
 **Estimated Time**: 1 week (quickstart.md: 30 minutes setup + configuration)
 
-- [X] T001 Initialize Docusaurus project with TypeScript and Classic preset at repository root using `npx create-docusaurus@latest . classic --typescript`
+- [X]  T001 Initialize Docusaurus project with TypeScript and Classic preset inside the frontend folder at the project root, ensuring all Docusaurus-related files and directories (docs, src, static, config files, etc.) reside within frontend. Use npx create-docusaurus@latest frontend classic --typescript to set up.
 - [X] T002 Install required dependencies: @docusaurus/theme-mermaid, @docusaurus/plugin-google-gtag, @easyops-cn/docusaurus-search-local, @docusaurus/plugin-ideal-image in package.json
 - [X] T003 [P] Create monorepo directory structure: docs/, examples/, static/img/, static/diagrams/, src/components/, src/css/, src/pages/
 - [X] T004 [P] Configure Git LFS for images in .gitattributes with patterns *.png, *.jpg
@@ -148,9 +148,9 @@
 
 ### Module 2 Content Creation
 
-- [ ] T054 [P] [US2] Create docs/module2/chapter1.md with Physics Simulation Fundamentals content (rigid body dynamics, collision detection, sensor simulation, learning objectives)
-- [ ] T055 [P] [US2] Create docs/module2/chapter2.md with Gazebo Setup & Configuration content (installation, world files, plugin architecture, GUI overview)
-- [ ] T056 [P] [US2] Create docs/module2/chapter3.md with URDF/SDF Formats content (comparison, when to use each, sensor definitions, actuator models)
+- [X] T054 [P] [US2] Create frontend/docs/module2/chapter1.md with Physics Simulation Fundamentals content (rigid body dynamics, collision detection, sensor simulation, learning objectives)
+- [X] T055 [P] [US2] Create frontend/docs/module2/chapter2.md with Gazebo Setup & Configuration content (installation, world files, plugin architecture, GUI overview)
+- [X] T056 [P] [US2] Create frontend/docs/module2/chapter3.md with URDF/SDF Formats content (comparison, when to use each, sensor definitions, actuator models)
 - [ ] T057 [P] [US2] Create docs/module2/chapter4.md with Unity Integration content (Unity-ROS 2 bridge, robotics simulation in Unity, advantages vs Gazebo)
 - [ ] T058 [US2] Create docs/module2/chapter5.md with Hands-on: Custom Environment (prerequisites, world file creation, sensor integration, robot spawning, ⏱️ 60 minutes badge)
 
