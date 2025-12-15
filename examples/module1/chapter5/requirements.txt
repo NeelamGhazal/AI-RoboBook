@@ -1,0 +1,6 @@
+# Requirements for RoboBook Module 1 Chapter 5 Examples
+# ROS 2 Humble Hawksbill dependencies
+
+rclpy>=3.0.0
+std_msgs>=4.0.0
+setuptools>=60.0.0
