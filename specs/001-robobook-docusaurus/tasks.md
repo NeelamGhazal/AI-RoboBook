@@ -193,19 +193,19 @@
 
 ### Module 3 Content Creation (Advanced Reference - Level 3)
 
-- [ ] T072 [P] [US3] Create docs/module3/chapter1.md with Isaac Sim Introduction content (NVIDIA Omniverse, USD format, Isaac Sim capabilities, system requirements, installation, 10+ pages advanced reference)
-- [ ] T073 [P] [US3] Create docs/module3/chapter2.md with Isaac ROS VSLAM/Perception content (visual SLAM algorithms, depth perception, sensor fusion, Isaac ROS packages, 10+ pages)
-- [ ] T074 [P] [US3] Create docs/module3/chapter3.md with Nav2 Path Planning content (navigation stack architecture, costmaps, planners, controllers, recovery behaviors, 10+ pages)
-- [ ] T075 [P] [US3] Create docs/module3/chapter4.md with Synthetic Data & Sim-to-Real content (domain randomization, synthetic data generation, reality gap, transfer learning strategies, 10+ pages)
-- [ ] T076 [US3] Create docs/module3/chapter5.md with Hands-on: Perception Pipeline (prerequisites, Isaac Sim setup, VSLAM launch, Nav2 configuration, full navigation demo, ⏱️ 90 minutes badge, 10+ pages)
+- [X] T072 [P] [US3] Create frontend/docs/module3/chapter1.md with Isaac Sim Introduction content (NVIDIA Omniverse, USD format, Isaac Sim capabilities, system requirements, installation, 10+ pages advanced reference)
+- [X] T073 [P] [US3] Create frontend/docs/module3/chapter2.md with Isaac ROS VSLAM/Perception content (visual SLAM algorithms, depth perception, sensor fusion, Isaac ROS packages, 10+ pages)
+- [X] T074 [P] [US3] Create frontend/docs/module3/chapter3.md with Nav2 Path Planning content (navigation stack architecture, costmaps, planners, controllers, recovery behaviors, 10+ pages)
+- [X] T075 [P] [US3] Create frontend/docs/module3/chapter4.md with Synthetic Data & Sim-to-Real content (domain randomization, synthetic data generation, reality gap, transfer learning strategies, 10+ pages)
+- [X] T076 [US3] Create frontend/docs/module3/chapter5.md with Hands-on: Perception Pipeline (prerequisites, Isaac Sim setup, VSLAM launch, Nav2 configuration, full navigation demo, ⏱️ 90 minutes badge, 10+ pages)
 
 ### Module 3 Code Examples (Docker-tested)
 
-- [ ] T077 [P] [US3] Create examples/module3/chapter5/isaac_vslam_launch.py with ROS 2 launch file for Isaac VSLAM node (camera configuration, parameters)
-- [ ] T078 [P] [US3] Create examples/module3/chapter5/nav2_params.yaml with Nav2 parameter configuration (costmap settings, planner selection, controller tuning)
-- [ ] T079 [P] [US3] Create examples/module3/chapter5/perception_pipeline.py with Python script orchestrating VSLAM + Nav2 integration
-- [ ] T080 [P] [US3] Create examples/module3/chapter5/requirements.txt with isaac-ros-visual-slam, nav2-simple-commander dependencies
-- [ ] T081 [US3] Create examples/module3/chapter5/README.md with Isaac Sim Docker container setup, VSLAM verification, Nav2 navigation test
+- [X] T077 [P] [US3] Create frontend/examples/module3/chapter5/isaac_vslam_launch.py with ROS 2 launch file for Isaac VSLAM node (camera configuration, parameters)
+- [X] T078 [P] [US3] Create frontend/examples/module3/chapter5/nav2_params.yaml with Nav2 parameter configuration (embedded in chapter5.md documentation)
+- [X] T079 [P] [US3] Create frontend/examples/module3/chapter5/perception_pipeline.py with Python script orchestrating VSLAM + Nav2 integration
+- [X] T080 [P] [US3] Create frontend/examples/module3/chapter5/requirements.txt with isaac-ros-visual-slam, nav2-simple-commander dependencies
+- [X] T081 [US3] Create frontend/examples/module3/chapter5/README.md with Isaac Sim Docker container setup, VSLAM verification, Nav2 navigation test
 - [ ] T082 [US3] Test Module 3 examples in Docker container (verify VSLAM initializes, Nav2 path planning works, robot navigates to goal)
 
 ### Module 4 Content Creation (Advanced Reference - Level 3)
@@ -227,8 +227,8 @@
 
 ### Module 3 & 4 Diagrams
 
-- [ ] T094 [P] [US3] Create Isaac Sim architecture diagram (Mermaid) in docs/module3/chapter1.md showing Omniverse, USD, Isaac ROS integration
-- [ ] T095 [P] [US3] Create Nav2 navigation stack diagram (Mermaid) in docs/module3/chapter3.md showing planners, controllers, costmaps, behavior tree
+- [X] T094 [P] [US3] Create Isaac Sim architecture diagram (Mermaid) in frontend/docs/module3/chapter1.md showing Omniverse, USD, Isaac ROS integration
+- [X] T095 [P] [US3] Create Nav2 navigation stack diagram (Mermaid) in frontend/docs/module3/chapter3.md showing planners, controllers, costmaps, behavior tree
 - [ ] T096 [P] [US3] Create Voice-to-Action pipeline diagram (Mermaid) in docs/module4/chapter1.md showing audio → Whisper → NLP → ROS 2 actions flow
 - [ ] T097 [P] [US3] Create multi-modal interaction architecture diagram (Mermaid) in docs/module4/chapter4.md
 

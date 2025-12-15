@@ -1,0 +1,96 @@
+# Python dependencies for Module 3 - Perception Pipeline Examples
+#
+# These packages are required to run the Isaac ROS VSLAM and Nav2
+# integration examples for autonomous robot navigation.
+#
+# Installation:
+#   pip install -r requirements.txt
+#
+# Note: Most dependencies are ROS 2 packages, not pip packages
+# Install via apt on Ubuntu 22.04
+
+# ============================================
+# ROS 2 Packages (install via apt)
+# ============================================
+
+# ROS 2 Humble Core
+# sudo apt install ros-humble-ros-base
+
+# Isaac ROS Visual SLAM
+# See: https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_visual_slam/index.html
+# Follow NVIDIA's installation instructions for Isaac ROS packages
+
+# Nav2 Navigation Stack
+# sudo apt install ros-humble-navigation2
+# sudo apt install ros-humble-nav2-bringup
+# sudo apt install ros-humble-nav2-simple-commander
+
+# TF2 for transforms
+# sudo apt install ros-humble-tf2-ros
+# sudo apt install ros-humble-tf2-tools
+
+# Sensor packages
+# sudo apt install ros-humble-sensor-msgs
+# sudo apt install ros-humble-sensor-msgs-py
+
+# Isaac Sim (optional, for simulation)
+# Download from: https://developer.nvidia.com/isaac-sim
+# Requires NVIDIA GPU with RTX support
+
+# ============================================
+# Python Packages (install via pip)
+# ============================================
+
+# NumPy for numerical operations
+numpy>=1.21.0
+
+# Transforms3d for coordinate transformations
+transforms3d>=0.4.1
+
+# PyYAML for configuration files
+pyyaml>=5.4.0
+
+# Optional: For trajectory analysis
+# scipy>=1.7.0
+
+# Optional: For visualization
+# matplotlib>=3.4.0
+
+# ============================================
+# System Requirements
+# ============================================
+
+# NVIDIA GPU Driver >= 525
+# CUDA Toolkit >= 11.8
+# cuDNN >= 8.6
+# TensorRT >= 8.5 (for Isaac ROS)
+
+# Check your GPU driver version:
+#   nvidia-smi
+
+# Check CUDA version:
+#   nvcc --version
+
+# ============================================
+# Development Tools (optional)
+# ============================================
+
+# RViz2 for visualization
+# sudo apt install ros-humble-rviz2
+
+# RQt for debugging
+# sudo apt install ros-humble-rqt
+# sudo apt install ros-humble-rqt-image-view
+# sudo apt install ros-humble-rqt-graph
+
+# Colcon for building ROS 2 workspaces
+# sudo apt install python3-colcon-common-extensions
+
+# ============================================
+# Verification
+# ============================================
+
+# After installation, verify with:
+#   ros2 pkg list | grep isaac_ros_visual_slam
+#   ros2 pkg list | grep nav2
+#   python3 -c "import numpy; import tf_transformations; print('OK')"
