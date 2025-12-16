@@ -8,14 +8,14 @@ module.exports = {
   favicon: '/img/robobook-logo.png',
 
   // Set the production url of your site here
-  url: 'https://phyai-humanoid-textbook.github.io',
+  url: 'https://NeelamGhazal.github.io',
   // Set the /<base>/ pathname under which your site is served
   // For GitHub Pages: /<username>.github.io/<project-name>/
-  baseUrl: '/phyai-humanoid-textbook/',
+  baseUrl: '/AI-RoboBook',
 
   // GitHub pages deployment config.
-  organizationName: 'phyai-humanoid-textbook',
-  projectName: 'phyai-humanoid-textbook.github.io',
+  organizationName: 'NeelamGhazal',
+  projectName: 'AI-RoboBook',
 
   onBrokenLinks: 'throw',
 
@@ -46,7 +46,7 @@ module.exports = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/phyai-humanoid-textbook/phyai-humanoid-textbook/edit/main/',
+            '/',
         },
         blog: false, // Optional: disable the blog plugin
         theme: {
@@ -98,7 +98,7 @@ module.exports = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/phyai-humanoid-textbook',
+                href: 'https://github.com/NeelamGhazal/AI-RoboBook.git',
               },
             ],
           },
