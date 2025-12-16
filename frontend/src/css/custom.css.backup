@@ -1,0 +1,223 @@
+/**
+ * Custom CSS for RoboBook Docusaurus theme
+ * RoboBook Color Palette:
+ * - Dark Navy: #0f1729
+ * - Darker Navy: #1a1f3a
+ * - Cyan Accent: #00d4ff
+ * - Light Cyan: #0ea5e9
+ */
+
+/* CSS Variables for RoboBook theme */
+:root {
+  /* Primary colors */
+  --ifm-color-primary: #00d4ff;
+  --ifm-color-primary-dark: #00bfe6;
+  --ifm-color-primary-darker: #00b2d4;
+  --ifm-color-primary-darkest: #0094b0;
+  --ifm-color-primary-light: #1ad9ff;
+  --ifm-color-primary-lighter: #26dfff;
+  --ifm-color-primary-lightest: #4de6ff;
+
+  /* Background colors */
+  --ifm-background-color: #0f1729;
+  --ifm-background-surface-color: #1a1f3a;
+  --ifm-footer-background-color: #0f1729;
+  --ifm-navbar-background-color: #0f1729;
+
+  /* Typography scale */
+  --ifm-heading-font-size-h1: 3.5rem;
+  --ifm-heading-font-size-h2: 2.5rem;
+  --ifm-heading-font-size-h3: 1.75rem;
+  --ifm-font-size-base: 1rem;
+
+  /* Spacing grid system (8px base) */
+  --ifm-spacing-horizontal: 8px;
+  --ifm-spacing-vertical: 8px;
+
+  /* Code colors */
+  --ifm-color-code-background: #1a1f3a;
+  --ifm-code-font-size: 95%;
+}
+
+/* Dark mode specific overrides */
+html[data-theme='dark'] {
+  --ifm-color-primary: #00d4ff;
+  --ifm-background-color: #0f1729;
+  --ifm-background-surface-color: #1a1f3a;
+}
+
+/* Glassmorphism card styling */
+.card {
+  background: rgba(26, 31, 58, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Hover effects for cards */
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+/* Hover effects for interactive elements */
+a:hover,
+button:hover,
+.navbar__link:hover {
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Custom hover animations */
+.navbar__link:hover,
+.menu__link:hover {
+  color: #00d4ff !important;
+  transform: translateX(4px);
+}
+
+/* Code block styling */
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+/* Custom prism theme for code syntax highlighting */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #64748b;
+}
+
+.token.punctuation {
+  color: #cbd5e1;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #00d4ff;
+}
+
+.token.boolean,
+.token.number {
+  color: #f59e0b;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #0ea5e9;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #8b5cf6;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #00d4ff;
+}
+
+.token.function,
+.token.class-name {
+  color: #0ea5e9;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #f59e0b;
+}
+
+/* Sidebar styling */
+.menu {
+  background: #1a1f3a;
+}
+
+/* Button styling */
+.button {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+/* Custom hover shimmer animation */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom footer styling */
+.footer {
+  background: #0f1729;
+  border-top: 1px solid #1a1f3a;
+}
+
+/* Homepage feature cards */
+.homepage-feature-card {
+  background: rgba(26, 31, 58, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  transition: all 0.3s ease;
+  padding: 2rem;
+  height: 100%;
+}
+
+.homepage-feature-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+/* Time estimate badges */
+.time-estimate {
+  display: inline-block;
+  background: rgba(0, 212, 255, 0.1);
+  color: #00d4ff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}

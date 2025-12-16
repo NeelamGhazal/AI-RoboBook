@@ -1,0 +1,368 @@
+/**
+ * Code Blocks Component
+ * RoboBook UI Theme - Tech Cyber
+ *
+ * Syntax highlighting and code block styling:
+ * - Dark background with cyan accents
+ * - Prism theme customization
+ * - Copy button styling
+ * - Inline code styling
+ */
+
+/* ============================================
+   CODE BLOCK CONTAINER
+   ============================================ */
+
+.prism-code,
+pre[class*='language-'] {
+  background: var(--ifm-pre-background) !important;
+  border: 1px solid rgba(45, 52, 84, 0.5);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) !important;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-code);
+  line-height: 1.5;
+  overflow-x: auto;
+  margin: var(--spacing-lg) 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   INLINE CODE
+   ============================================ */
+
+code {
+  background: var(--ifm-code-background);
+  color: var(--color-primary);
+  border: 1px solid var(--cyan-20);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-2xs) var(--spacing-xs);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-code);
+}
+
+/* Remove inline code styling inside code blocks */
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ============================================
+   CODE BLOCK LINE HIGHLIGHTING
+   ============================================ */
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 212, 255, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid var(--color-primary);
+}
+
+/* ============================================
+   CODE BLOCK TITLE
+   ============================================ */
+
+.prism-code[class*='language-']::before {
+  background: var(--bg-accent);
+  border-bottom: 1px solid var(--cyan-20);
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs) var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   COPY BUTTON
+   ============================================ */
+
+.theme-code-block-copy-button,
+button[class*='copyButton'] {
+  background: var(--bg-accent);
+  border: 1px solid var(--cyan-20);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.theme-code-block-copy-button:hover,
+button[class*='copyButton']:hover {
+  background: var(--cyan-10);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 10px var(--cyan-40);
+}
+
+.theme-code-block-copy-button:active,
+button[class*='copyButton']:active {
+  transform: scale(0.95);
+}
+
+/* Success state after copying */
+.theme-code-block-copy-button[data-copied='true'],
+button[class*='copyButton'][data-copied='true'] {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+/* ============================================
+   PRISM SYNTAX HIGHLIGHTING THEME
+   ============================================ */
+
+/**
+ * Custom Prism Theme - Tech Cyber
+ * Optimized for dark navy background
+ */
+
+/* Comments */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Punctuation */
+.token.punctuation {
+  color: #cbd5e1;
+}
+
+/* Keywords, Tags, Constants */
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--color-primary); /* Cyan */
+}
+
+/* Booleans, Numbers */
+.token.boolean,
+.token.number {
+  color: var(--color-warning); /* Orange */
+}
+
+/* Strings, Attributes */
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--color-secondary); /* Light Blue */
+}
+
+/* Operators, URLs */
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #8b5cf6; /* Purple */
+}
+
+/* Keywords, Atrules */
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--color-primary); /* Cyan */
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Functions, Classes */
+.token.function,
+.token.class-name {
+  color: var(--color-secondary); /* Light Blue */
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Regex, Important, Variables */
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--color-warning); /* Orange */
+}
+
+/* Italics */
+.token.important,
+.token.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+/* ============================================
+   LANGUAGE LABELS
+   ============================================ */
+
+/**
+ * Language identifier badges
+ * Shows language name at top-right of code block
+ */
+
+code[class*='language-']::before,
+pre[class*='language-']::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--bg-accent);
+  color: var(--text-muted);
+  padding: var(--spacing-2xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+pre[class*='language-python']::before {
+  content: 'Python';
+  color: var(--color-primary);
+}
+
+pre[class*='language-cpp']::before,
+pre[class*='language-c++']::before {
+  content: 'C++';
+  color: var(--color-secondary);
+}
+
+pre[class*='language-bash']::before,
+pre[class*='language-shell']::before {
+  content: 'Bash';
+  color: var(--color-success);
+}
+
+pre[class*='language-yaml']::before,
+pre[class*='language-yml']::before {
+  content: 'YAML';
+  color: var(--color-warning);
+}
+
+pre[class*='language-javascript']::before,
+pre[class*='language-js']::before {
+  content: 'JavaScript';
+  color: var(--color-warning);
+}
+
+pre[class*='language-typescript']::before,
+pre[class*='language-ts']::before {
+  content: 'TypeScript';
+  color: var(--color-secondary);
+}
+
+pre[class*='language-json']::before {
+  content: 'JSON';
+  color: var(--color-primary);
+}
+
+pre[class*='language-xml']::before,
+pre[class*='language-html']::before {
+  content: 'HTML';
+  color: var(--color-error);
+}
+
+pre[class*='language-css']::before {
+  content: 'CSS';
+  color: var(--color-secondary);
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 767px) {
+  .prism-code,
+  pre[class*='language-'] {
+    padding: var(--spacing-sm) !important;
+    font-size: 0.8rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Horizontal scroll for mobile */
+  .prism-code,
+  pre[class*='language-'] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ============================================
+   MARKDOWN CODE BLOCKS
+   ============================================ */
+
+/**
+ * Markdown content code styling
+ * Ensure consistent styling in .markdown class
+ */
+
+.markdown code {
+  background: var(--ifm-code-background);
+  color: var(--color-primary);
+  border: 1px solid var(--cyan-20);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-2xs) var(--spacing-xs);
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+}
+
+.markdown pre {
+  background: var(--ifm-pre-background);
+  border: 1px solid rgba(45, 52, 84, 0.5);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  overflow-x: auto;
+  margin: var(--spacing-lg) 0;
+}
+
+.markdown pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: var(--font-size-code);
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+/**
+ * Custom scrollbar for code blocks
+ * Styled to match theme
+ */
+
+pre[class*='language-']::-webkit-scrollbar {
+  height: 8px;
+}
+
+pre[class*='language-']::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+}
+
+pre[class*='language-']::-webkit-scrollbar-thumb {
+  background: var(--cyan-40);
+  border-radius: var(--radius-sm);
+}
+
+pre[class*='language-']::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan-60);
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATION
+   ============================================ */
+
+.theme-code-block-copy-button,
+button[class*='copyButton'] {
+  will-change: transform, background-color;
+}

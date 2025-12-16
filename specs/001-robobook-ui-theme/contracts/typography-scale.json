@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RoboBook Typography Scale",
+  "description": "Type system with 1.25 modular scale based on 16px base",
+  "version": "1.0.0",
+  "fonts": {
+    "family": {
+      "base": {
+        "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+        "cssVar": "--font-family-base",
+        "usage": "All body text, headings, UI elements"
+      },
+      "mono": {
+        "value": "'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace",
+        "cssVar": "--font-family-mono",
+        "usage": "Code blocks, inline code, technical text"
+      }
+    }
+  },
+  "scale": {
+    "base_size": "16px",
+    "ratio": 1.25,
+    "sizes": {
+      "h1": {
+        "rem": "3.5rem",
+        "px": "56px",
+        "cssVar": "--font-size-h1",
+        "usage": "Hero titles, page titles",
+        "line_height": "1.2",
+        "font_weight": "800"
+      },
+      "h2": {
+        "rem": "3.0rem",
+        "px": "48px",
+        "cssVar": "--font-size-h2",
+        "usage": "Section headings",
+        "line_height": "1.2",
+        "font_weight": "700"
+      },
+      "h3": {
+        "rem": "2.0rem",
+        "px": "32px",
+        "cssVar": "--font-size-h3",
+        "usage": "Subsection headings",
+        "line_height": "1.2",
+        "font_weight": "700"
+      },
+      "h4": {
+        "rem": "1.5rem",
+        "px": "24px",
+        "cssVar": "--font-size-h4",
+        "usage": "Component titles, card headings",
+        "line_height": "1.3",
+        "font_weight": "600"
+      },
+      "h5": {
+        "rem": "1.25rem",
+        "px": "20px",
+        "cssVar": "--font-size-h5",
+        "usage": "Small headings, labels",
+        "line_height": "1.3",
+        "font_weight": "600"
+      },
+      "body_large": {
+        "rem": "1.25rem",
+        "px": "20px",
+        "cssVar": "--font-size-lg",
+        "usage": "Hero descriptions, intro paragraphs",
+        "line_height": "1.6",
+        "font_weight": "400"
+      },
+      "body": {
+        "rem": "1rem",
+        "px": "16px",
+        "cssVar": "--font-size-base",
+        "usage": "Main content, documentation text",
+        "line_height": "1.6",
+        "font_weight": "400"
+      },
+      "body_small": {
+        "rem": "0.875rem",
+        "px": "14px",
+        "cssVar": "--font-size-sm",
+        "usage": "Captions, metadata, secondary text",
+        "line_height": "1.5",
+        "font_weight": "400"
+      },
+      "code": {
+        "rem": "0.875rem",
+        "px": "14px",
+        "cssVar": "--font-size-code",
+        "usage": "Code blocks, inline code",
+        "line_height": "1.5",
+        "font_weight": "400"
+      }
+    }
+  },
+  "weights": {
+    "regular": {
+      "value": "400",
+      "cssVar": "--font-weight-regular",
+      "usage": "Body text, descriptions"
+    },
+    "medium": {
+      "value": "500",
+      "cssVar": "--font-weight-medium",
+      "usage": "Emphasized text"
+    },
+    "semibold": {
+      "value": "600",
+      "cssVar": "--font-weight-semibold",
+      "usage": "Headings 4-5, navigation labels"
+    },
+    "bold": {
+      "value": "700",
+      "cssVar": "--font-weight-bold",
+      "usage": "Headings 2-3, buttons"
+    },
+    "extrabold": {
+      "value": "800",
+      "cssVar": "--font-weight-extrabold",
+      "usage": "Hero titles (h1 only)"
+    }
+  },
+  "line_heights": {
+    "tight": {
+      "value": "1.2",
+      "cssVar": "--line-height-tight",
+      "usage": "Headings, titles"
+    },
+    "normal": {
+      "value": "1.5",
+      "cssVar": "--line-height-normal",
+      "usage": "Code, small text"
+    },
+    "relaxed": {
+      "value": "1.6",
+      "cssVar": "--line-height-relaxed",
+      "usage": "Body text, documentation content (optimal readability)"
+    }
+  },
+  "responsive_scaling": {
+    "mobile": {
+      "breakpoint": "< 768px",
+      "h1": "2rem (32px)",
+      "h2": "1.75rem (28px)",
+      "h3": "1.5rem (24px)",
+      "body": "1rem (16px) - no scaling",
+      "note": "Headings scale down, body text remains 16px for readability"
+    },
+    "tablet": {
+      "breakpoint": "768px - 1023px",
+      "h1": "2.5rem (40px)",
+      "h2": "2.25rem (36px)",
+      "h3": "1.75rem (28px)",
+      "body": "1rem (16px) - no scaling"
+    },
+    "desktop": {
+      "breakpoint": ">= 1024px",
+      "h1": "3.5rem (56px) - full scale",
+      "h2": "3rem (48px) - full scale",
+      "h3": "2rem (32px) - full scale",
+      "body": "1rem (16px) - no scaling"
+    }
+  },
+  "usage_examples": {
+    "hero_title": {
+      "font_family": "--font-family-base",
+      "font_size": "--font-size-h1",
+      "font_weight": "--font-weight-extrabold",
+      "line_height": "--line-height-tight",
+      "color": "--text-primary"
+    },
+    "section_heading": {
+      "font_family": "--font-family-base",
+      "font_size": "--font-size-h2",
+      "font_weight": "--font-weight-bold",
+      "line_height": "--line-height-tight",
+      "color": "--text-primary"
+    },
+    "body_paragraph": {
+      "font_family": "--font-family-base",
+      "font_size": "--font-size-base",
+      "font_weight": "--font-weight-regular",
+      "line_height": "--line-height-relaxed",
+      "color": "--text-secondary"
+    },
+    "code_block": {
+      "font_family": "--font-family-mono",
+      "font_size": "--font-size-code",
+      "font_weight": "--font-weight-regular",
+      "line_height": "--line-height-normal",
+      "color": "--color-primary"
+    }
+  },
+  "accessibility_notes": {
+    "base_size": "16px base ensures text is readable without zooming",
+    "line_height": "1.6 for body text exceeds WCAG recommendation (1.5 minimum)",
+    "responsive": "Headings scale down on mobile but body text stays 16px for readability",
+    "system_fonts": "Zero loading delay, consistent with OS, excellent readability"
+  }
+}

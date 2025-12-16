@@ -1,15 +1,133 @@
 /**
- * Custom CSS for RoboBook Docusaurus theme
- * RoboBook Color Palette:
- * - Dark Navy: #0f1729
- * - Darker Navy: #1a1f3a
- * - Cyan Accent: #00d4ff
- * - Light Cyan: #0ea5e9
+ * RoboBook UI Theme - Custom CSS
+ * Tech Cyber Theme: Dark Navy + Cyan Aesthetic
+ * Feature: 001-robobook-ui-theme
+ *
+ * Design System:
+ * - 12-color palette (WCAG AA compliant)
+ * - 9-level typography scale (1.25 ratio)
+ * - 10-value spacing system (8px base)
+ * - 4-state interaction system
+ * - GPU-accelerated animations
  */
 
-/* CSS Variables for RoboBook theme */
+/* ============================================
+   DESIGN TOKENS: Color System
+   ============================================ */
+
 :root {
-  /* Primary colors */
+  /* Background Colors */
+  --bg-primary: #0f1729;
+  --bg-secondary: #1a1f3a;
+  --bg-accent: #2d3454;
+
+  /* Accent Colors */
+  --color-primary: #00d4ff;
+  --color-secondary: #0ea5e9;
+  --color-bright: #22d3ee;
+  --primary-cyan: #00d4ff;
+
+  /* Component Colors */
+  --card-bg: rgba(26, 31, 58, 0.8);
+  --border-color: rgba(0, 212, 255, 0.2);
+  --nested-bg: rgba(0, 0, 0, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  /* Semantic Colors */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  /* Opacity Variants (for shadows and overlays) */
+  --cyan-10: rgba(0, 212, 255, 0.1);
+  --cyan-15: rgba(0, 212, 255, 0.15);
+  --cyan-20: rgba(0, 212, 255, 0.2);
+  --cyan-40: rgba(0, 212, 255, 0.4);
+  --cyan-60: rgba(0, 212, 255, 0.6);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #0ea5e9 100%);
+  --gradient-hero: linear-gradient(180deg, #0f1729 0%, #1a1f3a 100%);
+  --gradient-shimmer: linear-gradient(45deg, transparent 30%, rgba(0, 212, 255, 0.1) 50%, transparent 70%);
+
+  /* ============================================
+     DESIGN TOKENS: Typography
+     ============================================ */
+
+  /* Font Families */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+                      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+                      'Helvetica Neue', sans-serif;
+  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Courier New', monospace;
+
+  /* Font Sizes (1.25 modular scale) */
+  --font-size-h1: 3.5rem;     /* 56px */
+  --font-size-h2: 3.0rem;     /* 48px */
+  --font-size-h3: 2.0rem;     /* 32px */
+  --font-size-h4: 1.5rem;     /* 24px */
+  --font-size-h5: 1.25rem;    /* 20px */
+  --font-size-lg: 1.25rem;    /* 20px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-code: 0.875rem; /* 14px */
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+
+  /* ============================================
+     DESIGN TOKENS: Spacing (8px Grid System)
+     ============================================ */
+
+  --spacing-3xs: 0.125rem;  /* 2px */
+  --spacing-2xs: 0.25rem;   /* 4px */
+  --spacing-xs: 0.5rem;     /* 8px */
+  --spacing-sm: 0.75rem;    /* 12px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  --spacing-3xl: 4rem;      /* 64px */
+  --spacing-4xl: 6rem;      /* 96px */
+
+  /* ============================================
+     DESIGN TOKENS: Effects
+     ============================================ */
+
+  /* Transitions */
+  --transition-fast: 0.1s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease;
+
+  /* Shadows */
+  --shadow-glow: 0 0 30px var(--cyan-40), 0 0 60px var(--cyan-20);
+  --shadow-button: 0 0 25px var(--cyan-60);
+  --shadow-card: 0 0 20px var(--cyan-40);
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* ============================================
+     DOCUSAURUS INFIMA OVERRIDES
+     ============================================ */
+
+  /* Primary Color System */
   --ifm-color-primary: #00d4ff;
   --ifm-color-primary-dark: #00bfe6;
   --ifm-color-primary-darker: #00b2d4;
@@ -18,33 +136,281 @@
   --ifm-color-primary-lighter: #26dfff;
   --ifm-color-primary-lightest: #4de6ff;
 
-  /* Background colors */
+  /* Background Colors */
   --ifm-background-color: #0f1729;
   --ifm-background-surface-color: #1a1f3a;
   --ifm-footer-background-color: #0f1729;
-  --ifm-navbar-background-color: #0f1729;
+  --ifm-navbar-background-color: rgba(15, 23, 41, 0.9);
 
-  /* Typography scale */
+  /* Typography */
+  --ifm-font-color-base: #ffffff;
+  --ifm-font-family-base: var(--font-family-base);
+  --ifm-font-family-monospace: var(--font-family-mono);
+  --ifm-heading-color: #ffffff;
+  --ifm-link-color: #00d4ff;
+  --ifm-link-hover-color: #22d3ee;
+
+  /* Code Block Colors */
+  --ifm-code-background: #1a1f3a;
+  --ifm-pre-background: #1a1f3a;
+  --ifm-code-font-size: 0.875rem;
+
+  /* Heading Font Sizes */
   --ifm-heading-font-size-h1: 3.5rem;
-  --ifm-heading-font-size-h2: 2.5rem;
-  --ifm-heading-font-size-h3: 1.75rem;
-  --ifm-font-size-base: 1rem;
+  --ifm-heading-font-size-h2: 3.0rem;
+  --ifm-heading-font-size-h3: 2.0rem;
+  --ifm-heading-font-size-h4: 1.5rem;
+  --ifm-heading-font-size-h5: 1.25rem;
+  --ifm-heading-font-size-h6: 1rem;
 
-  /* Spacing grid system (8px base) */
-  --ifm-spacing-horizontal: 8px;
-  --ifm-spacing-vertical: 8px;
+  /* Spacing */
+  --ifm-spacing-horizontal: 1rem;
+  --ifm-spacing-vertical: 1rem;
+  --ifm-navbar-height: 70px;
+  --ifm-navbar-padding-horizontal: 2rem;
+  --ifm-navbar-padding-vertical: 0;
+  --ifm-navbar-item-padding-horizontal: 0.75rem;
+  --ifm-navbar-item-padding-vertical: 0.5rem;
 
-  /* Code colors */
-  --ifm-color-code-background: #1a1f3a;
-  --ifm-code-font-size: 95%;
+  /* Borders */
+  --ifm-global-border-width: 1px;
+  --ifm-global-radius: 8px;
 }
 
-/* Dark mode specific overrides */
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+
 html[data-theme='dark'] {
   --ifm-color-primary: #00d4ff;
   --ifm-background-color: #0f1729;
   --ifm-background-surface-color: #1a1f3a;
+  --ifm-font-color-base: #ffffff;
+  --ifm-heading-color: #ffffff;
+  --ifm-menu-color: #e5e7eb;
+  --ifm-menu-color-background-active: rgba(0, 212, 255, 0.15);
+  --ifm-menu-color-background-hover: rgba(0, 212, 255, 0.1);
+  --ifm-footer-background-color: #0f1729;
+  --ifm-footer-color: #e5e7eb;
+  --ifm-footer-link-color: #00d4ff;
+  --ifm-footer-link-hover-color: #22d3ee;
 }
+
+/* ============================================
+   LIGHT MODE OVERRIDES
+   ============================================ */
+
+[data-theme='light'] {
+  /* Background Colors */
+  --bg-primary: #f0f9ff;
+  --bg-secondary: #e0f2fe;
+  --card-bg: #ffffff;
+
+  /* Primary Colors */
+  --primary-cyan: #0284c7;
+  --secondary-blue: #0369a1;
+  --bright-cyan: #06b6d4;
+  --color-primary: #0284c7;
+  --color-secondary: #0369a1;
+  --color-bright: #06b6d4;
+
+  /* Text Colors */
+  --text-primary: #0c4a6e;
+  --text-secondary: #0e7490;
+  --text-muted: #64748b;
+
+  /* Borders & Effects */
+  --border-color: #bae6fd;
+  --hover-glow: rgba(2, 132, 199, 0.3);
+  --nested-bg: rgba(2, 132, 199, 0.08);
+  --shadow-color: rgba(2, 132, 199, 0.15);
+
+  /* Component-specific */
+  --cyan-10: rgba(2, 132, 199, 0.1);
+  --cyan-15: rgba(2, 132, 199, 0.15);
+  --cyan-20: rgba(2, 132, 199, 0.2);
+  --cyan-40: rgba(2, 132, 199, 0.4);
+  --cyan-60: rgba(2, 132, 199, 0.6);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+
+  /* Docusaurus Infima Overrides (Light) */
+  --ifm-color-primary: #0284c7;
+  --ifm-color-primary-dark: #0369a1;
+  --ifm-color-primary-darker: #075985;
+  --ifm-color-primary-darkest: #0c4a6e;
+  --ifm-color-primary-light: #0ea5e9;
+  --ifm-color-primary-lighter: #06b6d4;
+  --ifm-color-primary-lightest: #22d3ee;
+
+  --ifm-background-color: #f0f9ff;
+  --ifm-background-surface-color: #ffffff;
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.95);
+  --ifm-footer-background-color: #f0f9ff;
+
+  --ifm-font-color-base: #0c4a6e;
+  --ifm-heading-color: #0c4a6e;
+  --ifm-link-color: #0284c7;
+  --ifm-link-hover-color: #0369a1;
+
+  --ifm-menu-color: #0e7490;
+  --ifm-menu-color-background-active: rgba(2, 132, 199, 0.15);
+  --ifm-menu-color-background-hover: rgba(2, 132, 199, 0.08);
+  --ifm-footer-color: #0e7490;
+  --ifm-footer-link-color: #0284c7;
+  --ifm-footer-link-hover-color: #0369a1;
+
+  --ifm-code-background: #e0f2fe;
+  --ifm-pre-background: #e0f2fe;
+  --ifm-blockquote-border-left-color: #0284c7;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Body Typography */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+/* ============================================
+   COMPONENT IMPORTS
+   ============================================ */
+
+/* Animations - Load first (used by other components) */
+@import './components/animations.css';
+
+/* Navigation Components */
+@import './components/sidebar.css';
+@import './components/footer.css';
+@import './components/search.css';
+
+/* Content Components */
+@import './components/hero.css';
+@import './components/cards.css';
+@import './components/buttons.css';
+@import './components/code-blocks.css';
+
+/* Utilities (to be created later) */
+/* @import './utilities/colors.css'; */
+/* @import './utilities/spacing.css'; */
+/* @import './utilities/typography.css'; */
+
+/* ============================================
+   ACCESSIBILITY: FOCUS INDICATORS
+   ============================================ */
+
+/**
+ * Visible focus indicators for keyboard navigation
+ * WCAG 2.1 Level AA Compliance
+ */
+
+/* Focus styles for all interactive elements */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Specific focus styles for navigation */
+.menu__link:focus,
+.table-of-contents__link:focus,
+.pagination-nav__link:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  background: var(--cyan-10);
+  box-shadow: 0 0 0 4px var(--cyan-20);
+}
+
+/* Focus styles for buttons */
+.button:focus,
+.btn-primary:focus,
+.btn-secondary:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--cyan-20);
+}
+
+/* Focus styles for form inputs */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 0;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--cyan-20);
+}
+
+/* ============================================
+   ACCESSIBILITY: SKIP TO MAIN CONTENT
+   ============================================ */
+
+/**
+ * Skip-to-main-content link for keyboard navigation
+ * Hidden until focused via Tab key
+ */
+
+.skip-to-main {
+  position: absolute;
+  top: -100px;
+  left: var(--spacing-md);
+  z-index: 9999;
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  box-shadow: 0 4px 12px var(--cyan-40);
+  transition: top var(--transition-fast);
+}
+
+.skip-to-main:focus {
+  top: var(--spacing-md);
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ACCESSIBILITY: SCREEN READER ONLY
+   ============================================ */
+
+/**
+ * Visually hidden content that remains accessible to screen readers
+ */
+
+.sr-only,
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================
+   TEMPORARY: Existing Styles (to be migrated)
+   ============================================ */
 
 /* Glassmorphism card styling */
 .card {
@@ -64,14 +430,12 @@ html[data-theme='dark'] {
 
 /* Hover effects for interactive elements */
 a:hover,
-button:hover,
-.navbar__link:hover {
+button:hover {
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 /* Custom hover animations */
-.navbar__link:hover,
 .menu__link:hover {
   color: #00d4ff !important;
   transform: translateX(4px);
@@ -180,11 +544,6 @@ button:hover,
 @keyframes shimmer {
   0% { left: -100%; }
   100% { left: 100%; }
-}
-
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Custom footer styling */

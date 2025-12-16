@@ -1,0 +1,270 @@
+/**
+ * Navbar Layout Styles - Professional Design
+ * RoboBook Tech Cyber Theme
+ * Ensures perfect vertical alignment and no overflow
+ */
+
+.navbarHideable {
+  transition: transform var(--ifm-transition-fast) ease;
+}
+
+.navbarHidden {
+  transform: translate3d(0, calc(-100% - 2px), 0);
+}
+
+/* ============================================
+   NAVBAR CONTAINER - Base Styles
+   ============================================ */
+
+:global(.navbar) {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color) !important;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: var(--ifm-navbar-height) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ============================================
+   NAVBAR INNER CONTAINER - Perfect Centering
+   ============================================ */
+
+:global(.navbar__inner) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  max-width: 1400px;
+  margin: 0 auto !important;
+  padding: 0 var(--ifm-navbar-padding-horizontal) !important;
+  box-sizing: border-box !important;
+}
+
+/* ============================================
+   NAVBAR BRAND (Logo + Title Container)
+   ============================================ */
+
+:global(.navbar__brand) {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  margin-right: auto !important;
+  padding: 0 !important;
+  text-decoration: none !important;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   LOGO STYLING
+   ============================================ */
+
+:global(.navbar__logo) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: auto !important;
+  margin: 0 0.5rem 0 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0;
+}
+
+:global(.navbar__logo img) {
+  height: 45px !important;
+  width: auto !important;
+  max-height: 45px !important;
+  object-fit: contain;
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  transition: transform 0.3s ease;
+}
+
+:global(.navbar__logo:hover img) {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   TITLE TEXT
+   ============================================ */
+
+:global(.navbar__title) {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  display: inline-block;
+  vertical-align: middle;
+  transition: all 0.3s ease;
+}
+
+:global(.navbar__logo:hover .navbar__title),
+:global(.navbar__brand:hover .navbar__title) {
+  color: var(--primary-cyan) !important;
+  text-shadow: 0 0 10px var(--cyan-40);
+}
+
+/* ============================================
+   NAVBAR ITEMS CONTAINERS
+   ============================================ */
+
+:global(.navbar__items) {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+:global(.navbar__items--right) {
+  margin-left: auto !important;
+}
+
+/* ============================================
+   NAVBAR LINKS
+   ============================================ */
+
+:global(.navbar__link),
+:global(.navbar-sidebar__item),
+:global([class*='navbar'] a) {
+  /* color: var(--text-secondary) !important; */
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.5rem 0.75rem !important;
+  margin: 0 !important;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+  white-space: nowrap;
+  box-sizing: border-box !important;
+}
+
+:global(.navbar__link:hover),
+:global([class*='navbar'] a:hover) {
+  color: var(--primary-cyan) !important;
+  background: var(--cyan-10) !important;
+  text-decoration: none !important;
+  box-shadow: 0 0 15px var(--cyan-40);
+  transform: translateY(-1px);
+}
+
+:global(.navbar__link--active) {
+  color: var(--primary-cyan) !important;
+  background: var(--cyan-15) !important;
+}
+
+/* ============================================
+   SEARCH BAR
+   ============================================ */
+
+:global(.navbarSearchContainer) {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 var(--ifm-navbar-item-padding-horizontal) !important;
+}
+
+/* ============================================
+   MOBILE SIDEBAR TOGGLE
+   ============================================ */
+
+:global(.navbar__toggle) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+  margin-right: 0.75rem !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 996px) {
+  :global(.navbar__inner) {
+    padding: 0 1rem !important;
+  }
+
+  :global(.navbar__logo img) {
+    height: 38px !important;
+    max-height: 38px !important;
+  }
+
+  :global(.navbar__title) {
+    font-size: 1.125rem !important;
+  }
+
+  :global(.navbar__items) {
+    gap: 0.5rem;
+  }
+
+  :global(.navbar__link) {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.6rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  :global(.navbar__logo img) {
+    height: 32px !important;
+    max-height: 32px !important;
+  }
+
+  :global(.navbar__title) {
+    font-size: 1rem !important;
+  }
+
+  :global(.navbar__items) {
+    gap: 0.25rem;
+  }
+}
+
+/* ============================================
+   GLASSMORPHISM EFFECTS
+   ============================================ */
+
+:global(.navbar):hover {
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.15);
+}
+
+/* ============================================
+   PREVENT OVERFLOW & ENSURE BOX MODEL
+   ============================================ */
+
+:global(.navbar),
+:global(.navbar *) {
+  box-sizing: border-box !important;
+}
+
+:global(.navbar__inner > *) {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATION
+   ============================================ */
+
+:global(.navbar__logo img),
+:global(.navbar__link),
+:global(.navbar) {
+  will-change: transform;
+}

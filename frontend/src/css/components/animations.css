@@ -1,0 +1,190 @@
+/**
+ * Animations Component
+ * RoboBook UI Theme - Tech Cyber
+ *
+ * GPU-accelerated animations for premium interactions
+ * - Shimmer effect for card hovers
+ * - Pulse effect for badges
+ * - Smooth transitions for all interactive elements
+ */
+
+/* ============================================
+   SHIMMER ANIMATION
+   ============================================ */
+
+/**
+ * Shimmer Effect
+ * Diagonal gradient sweep across element on hover
+ * Usage: Apply .shimmer class to parent element
+ */
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: var(--gradient-shimmer);
+  transform: rotate(45deg);
+  transition: all var(--transition-slow);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.shimmer:hover::before {
+  animation: shimmer 1.5s infinite;
+}
+
+/* Ensure child content stays above shimmer */
+.shimmer > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================
+   PULSE ANIMATION
+   ============================================ */
+
+/**
+ * Pulse Effect
+ * Subtle glow that pulses on loop
+ * Usage: Apply .pulse class or animation: pulse 2s infinite
+ */
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--cyan-40);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--cyan-60);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* ============================================
+   FADE IN ANIMATION
+   ============================================ */
+
+/**
+ * Fade In Effect
+ * Smooth entrance animation
+ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ============================================
+   SLIDE IN ANIMATION
+   ============================================ */
+
+/**
+ * Slide In Effect
+ * Smooth slide from left
+ */
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+/* ============================================
+   GLOW ANIMATION
+   ============================================ */
+
+/**
+ * Glow Effect
+ * Intense glow on hover for buttons/CTAs
+ */
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--cyan-40), 0 0 20px var(--cyan-20);
+  }
+  50% {
+    box-shadow: 0 0 25px var(--cyan-60), 0 0 50px var(--cyan-40);
+  }
+}
+
+.glow {
+  animation: glow 2s infinite;
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+/**
+ * Accessibility: Respect user's motion preferences
+ * Disable all animations if user prefers reduced motion
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .shimmer::before,
+  .pulse,
+  .glow {
+    animation: none !important;
+  }
+}
+
+/* ============================================
+   GPU ACCELERATION HINTS
+   ============================================ */
+
+/**
+ * Performance optimization
+ * Hint to browser which properties will be animated
+ */
+
+.shimmer::before,
+.pulse,
+.glow {
+  will-change: transform, box-shadow;
+}

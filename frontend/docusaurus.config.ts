@@ -5,7 +5,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 module.exports = {
   title: 'RoboBook',
   tagline: 'Physical AI & Humanoid Robotics Curriculum',
-  favicon: 'img/favicon.ico',
+  favicon: '/img/robobook-logo.png',
 
   // Set the production url of your site here
   url: 'https://phyai-humanoid-textbook.github.io',
@@ -18,11 +18,14 @@ module.exports = {
   projectName: 'phyai-humanoid-textbook.github.io',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
 
   markdown: {
     mermaid: true,
-    onBrokenMarkdownLinks: 'warn',
+    mdx1Compat: {
+      comments: false,
+      admonitions: false,
+      headingIds: false,
+    },
   },
 
   // Even if you don't use internalization, you can use this field to set useful
@@ -62,21 +65,9 @@ module.exports = {
         title: 'RoboBook',
         logo: {
           alt: 'RoboBook Logo',
-          src: 'img/robobook-logo.svg',
+          src: 'img/robobook-logo.png',
         },
-        items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Modules',
-          },
-          {
-            href: 'https://github.com/phyai-humanoid-textbook',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
+        items: [],
       },
       footer: {
         style: 'dark',
@@ -126,10 +117,11 @@ module.exports = {
       prism: {
         theme: prismThemes.vsDark,
         darkTheme: prismThemes.vsDark,
-        additionalLanguages: ['python', 'cpp', 'yaml', 'xml'],
+        additionalLanguages: ['python', 'cpp', 'yaml', 'bash'],
       },
       colorMode: {
         defaultMode: 'dark',
+        disableSwitch: false,
         respectPrefersColorScheme: false,
       },
       mermaid: {
@@ -167,8 +159,4 @@ module.exports = {
       },
     ],
   ],
-
-  markdown: {
-    mermaid: true,
-  },
 };

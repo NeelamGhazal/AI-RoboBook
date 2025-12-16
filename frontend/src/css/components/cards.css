@@ -1,0 +1,285 @@
+/**
+ * Cards Component
+ * RoboBook UI Theme - Tech Cyber
+ *
+ * Feature cards and module cards with glassmorphism
+ * - Hover effects: scale + glow + shimmer
+ * - Responsive grid layouts
+ * - GPU-accelerated transforms
+ */
+
+/* ============================================
+   FEATURE CARDS
+   ============================================ */
+
+/**
+ * Feature Card
+ * Used for homepage module cards and feature highlights
+ */
+
+.feature-card,
+.homepage-feature-card {
+  background: rgba(26, 31, 58, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(45, 52, 84, 0.5);
+  padding: var(--spacing-xl);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-card:hover,
+.homepage-feature-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Shimmer effect on hover */
+.feature-card::before,
+.homepage-feature-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: var(--gradient-shimmer);
+  transform: rotate(45deg);
+  transition: all var(--transition-slow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.feature-card:hover::before,
+.homepage-feature-card:hover::before {
+  animation: shimmer 1.5s infinite;
+}
+
+/* Ensure card content stays above shimmer */
+.feature-card > *,
+.homepage-feature-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   FEATURE CARD ICON
+   ============================================ */
+
+.feature-card-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+  transition: all var(--transition-normal);
+  font-size: 2rem;
+}
+
+.feature-card:hover .feature-card-icon,
+.homepage-feature-card:hover .feature-card-icon {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 0 20px var(--cyan-60);
+}
+
+/* ============================================
+   FEATURE CARD TEXT
+   ============================================ */
+
+.feature-card-title {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.feature-card-description {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  flex-grow: 1;
+}
+
+/* ============================================
+   MODULE CARDS (Specific Styling)
+   ============================================ */
+
+/**
+ * Module Card
+ * For course module overview on homepage
+ */
+
+.module-card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(45, 52, 84, 0.5);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.module-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.module-card-number {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.module-card-title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-tight);
+}
+
+.module-card-description {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-lg);
+}
+
+.module-card-topics {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.module-card-topics li {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid rgba(45, 52, 84, 0.3);
+}
+
+.module-card-topics li:last-child {
+  border-bottom: none;
+}
+
+.module-card-topics li::before {
+  content: '→';
+  color: var(--color-primary);
+  margin-right: var(--spacing-sm);
+}
+
+/* ============================================
+   DOC CARD (Documentation Cards)
+   ============================================ */
+
+.doc-card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(45, 52, 84, 0.5);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.doc-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}
+
+/* ============================================
+   CARD GRID LAYOUTS
+   ============================================ */
+
+/**
+ * Features Grid
+ * 3-column responsive grid for feature cards
+ */
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin: var(--spacing-2xl) 0;
+}
+
+@media (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-2xl);
+  }
+}
+
+/**
+ * Module Grid
+ * 2-column responsive grid for module cards
+ */
+
+.module-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin: var(--spacing-2xl) 0;
+}
+
+@media (min-width: 768px) {
+  .module-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-2xl);
+  }
+}
+
+/* ============================================
+   LEGACY SUPPORT
+   ============================================ */
+
+/**
+ * Support for existing .card class
+ * Gradually migrate to .feature-card
+ */
+
+.card {
+  background: rgba(26, 31, 58, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--cyan-10);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--cyan-20);
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATION
+   ============================================ */
+
+.feature-card,
+.homepage-feature-card,
+.module-card,
+.doc-card {
+  will-change: transform, box-shadow;
+}

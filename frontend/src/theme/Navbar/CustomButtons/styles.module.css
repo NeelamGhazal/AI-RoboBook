@@ -1,0 +1,110 @@
+/**
+ * Custom Navbar Buttons Styles - Professional Design
+ * RoboBook Tech Cyber Theme
+ * Perfect vertical alignment with navbar
+ */
+
+/* Base button styles */
+.signInBtn,
+.signUpBtn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.5rem 0.875rem !important;
+  margin: 0 !important;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* Sign In button - outlined style */
+.signInBtn {
+  color: var(--text-secondary) !important;
+  background: transparent;
+  border: 1px solid var(--cyan-20);
+}
+
+.signInBtn:hover {
+  color: var(--primary-cyan) !important;
+  background: var(--cyan-10) !important;
+  border-color: var(--primary-cyan);
+  box-shadow: 0 0 15px var(--cyan-40);
+  transform: translateY(-1px);
+  text-decoration: none !important;
+}
+
+/* Sign Up button - gradient style */
+.signUpBtn {
+  color: var(--text-primary) !important;
+  background: var(--gradient-primary) !important;
+  border: none;
+}
+
+.signUpBtn:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 0 20px var(--cyan-60);
+  filter: brightness(1.1);
+  text-decoration: none !important;
+}
+
+/* SVG icon styling */
+.signInBtn svg,
+.signUpBtn svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: block;
+  margin: 0;
+}
+
+/* Focus states for accessibility */
+.signInBtn:focus,
+.signUpBtn:focus {
+  outline: 2px solid var(--primary-cyan);
+  outline-offset: 2px;
+}
+
+/* Mobile responsive */
+@media (max-width: 996px) {
+  .signInBtn,
+  .signUpBtn {
+    font-size: 0.8125rem;
+    padding: 0.4rem 0.75rem !important;
+  }
+
+  .signInBtn svg,
+  .signUpBtn svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .signInBtn span,
+  .signUpBtn span {
+    display: none;
+  }
+
+  .signInBtn,
+  .signUpBtn {
+    padding: 0.5rem !important;
+    min-width: 36px;
+    justify-content: center;
+  }
+
+  .signInBtn svg,
+  .signUpBtn svg {
+    width: 16px;
+    height: 16px;
+  }
+}

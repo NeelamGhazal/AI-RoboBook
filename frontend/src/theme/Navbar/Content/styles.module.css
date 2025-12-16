@@ -1,0 +1,15 @@
+/*
+Color mode toggle - keep visible on all viewports for Tech Cyber theme
+ */
+.colorModeToggle {
+  display: flex;
+  align-items: center;
+}
+
+/*
+Restore some Infima style that broke with CSS Cascade Layers
+See https://github.com/facebook/docusaurus/pull/11142
+ */
+:global(.navbar__items--right) > :last-child {
+  padding-right: 0;
+}

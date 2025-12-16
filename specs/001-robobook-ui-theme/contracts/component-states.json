@@ -1,0 +1,300 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RoboBook Component Interactive States",
+  "description": "4-state interaction system with visual feedback specifications",
+  "version": "1.0.0",
+  "states": {
+    "default": {
+      "description": "Initial, resting state before any user interaction",
+      "visual_treatment": {
+        "transform": "none",
+        "opacity": "1",
+        "cursor": "pointer (if interactive)",
+        "transition": "N/A"
+      }
+    },
+    "hover": {
+      "description": "Mouse cursor over element (desktop/laptop)",
+      "visual_treatment": {
+        "transform": "scale(1.05-1.08) or translateY(-8px)",
+        "border_color": "var(--color-primary)",
+        "box_shadow": "Cyan glow effect",
+        "cursor": "pointer",
+        "transition": "all 0.3s ease"
+      },
+      "specific_effects": {
+        "cards": {
+          "transform": "translateY(-8px) scale(1.05)",
+          "border_color": "var(--color-primary)",
+          "box_shadow": "0 0 30px var(--cyan-40), 0 0 60px var(--cyan-20)",
+          "shimmer_animation": "shimmer 1.5s infinite"
+        },
+        "buttons_primary": {
+          "transform": "scale(1.08)",
+          "box_shadow": "0 0 25px var(--cyan-60)"
+        },
+        "buttons_secondary": {
+          "transform": "scale(1.05)",
+          "background": "var(--cyan-10)",
+          "box_shadow": "0 0 20px var(--cyan-40)"
+        },
+        "links": {
+          "color": "var(--color-bright)",
+          "text_shadow": "0 0 8px var(--cyan-40)",
+          "underline": "Animate width from 0% to 100%"
+        }
+      }
+    },
+    "focus": {
+      "description": "Element receives keyboard focus (accessibility critical)",
+      "visual_treatment": {
+        "outline": "2px solid var(--color-primary)",
+        "outline_offset": "2px",
+        "transform": "scale(1.02) (subtle)",
+        "transition": "all 0.2s ease"
+      },
+      "wcag_requirement": {
+        "level": "AA (2.4.7 Focus Visible)",
+        "minimum_contrast": "3:1 against adjacent colors",
+        "note": "Focus indicator must be clearly visible"
+      }
+    },
+    "active": {
+      "description": "Element is being clicked/pressed",
+      "visual_treatment": {
+        "transform": "scale(0.98)",
+        "opacity": "0.9",
+        "transition": "all 0.1s ease"
+      }
+    }
+  },
+  "animations": {
+    "shimmer": {
+      "description": "Diagonal gradient sweep across card on hover",
+      "keyframes": {
+        "0%": "transform: translateX(-100%) translateY(-100%) rotate(45deg)",
+        "100%": "transform: translateX(100%) translateY(100%) rotate(45deg)"
+      },
+      "duration": "1.5s",
+      "timing": "infinite",
+      "gradient": "var(--gradient-shimmer)",
+      "css": "@keyframes shimmer { ... }",
+      "usage": "Applied to ::before pseudo-element on hover"
+    },
+    "pulse": {
+      "description": "Subtle pulsing glow for badges or notifications",
+      "keyframes": {
+        "0%, 100%": "box-shadow: 0 0 10px var(--cyan-40)",
+        "50%": "box-shadow: 0 0 20px var(--cyan-60)"
+      },
+      "duration": "2s",
+      "timing": "infinite ease-in-out"
+    },
+    "fadeIn": {
+      "description": "Smooth appearance for content loading",
+      "keyframes": {
+        "from": "opacity: 0; transform: translateY(10px)",
+        "to": "opacity: 1; transform: translateY(0)"
+      },
+      "duration": "0.4s",
+      "timing": "ease-out"
+    }
+  },
+  "transitions": {
+    "fast": {
+      "duration": "0.1s",
+      "timing": "ease",
+      "usage": "Active states, immediate feedback"
+    },
+    "normal": {
+      "duration": "0.2s to 0.3s",
+      "timing": "ease",
+      "usage": "Hover states, color changes, most interactions"
+    },
+    "slow": {
+      "duration": "0.4s to 0.6s",
+      "timing": "ease-out",
+      "usage": "Complex animations, shimmer effects"
+    }
+  },
+  "component_specifications": {
+    "card": {
+      "default": {
+        "background": "var(--bg-secondary)",
+        "border": "1px solid rgba(45, 52, 84, 0.5)",
+        "border_radius": "16px",
+        "padding": "var(--spacing-lg)",
+        "cursor": "pointer",
+        "transition": "all 0.3s ease",
+        "position": "relative",
+        "overflow": "hidden"
+      },
+      "hover": {
+        "transform": "translateY(-8px) scale(1.05)",
+        "border_color": "var(--color-primary)",
+        "box_shadow": "0 0 30px var(--cyan-40), 0 0 60px var(--cyan-20)",
+        "shimmer_before": "animation: shimmer 1.5s infinite"
+      },
+      "focus": {
+        "outline": "2px solid var(--color-primary)",
+        "outline_offset": "2px"
+      },
+      "active": {
+        "transform": "translateY(-6px) scale(1.03)",
+        "opacity": "0.95"
+      }
+    },
+    "button_primary": {
+      "default": {
+        "background": "var(--gradient-primary)",
+        "color": "var(--text-primary)",
+        "padding": "var(--spacing-sm) var(--spacing-xl)",
+        "border_radius": "8px",
+        "cursor": "pointer",
+        "transition": "all 0.3s ease",
+        "border": "none"
+      },
+      "hover": {
+        "transform": "scale(1.08)",
+        "box_shadow": "0 0 25px var(--cyan-60)"
+      },
+      "focus": {
+        "outline": "2px solid var(--color-primary)",
+        "outline_offset": "2px"
+      },
+      "active": {
+        "transform": "scale(1.05)",
+        "opacity": "0.9"
+      }
+    },
+    "button_secondary": {
+      "default": {
+        "background": "transparent",
+        "color": "var(--color-primary)",
+        "border": "2px solid var(--color-primary)",
+        "padding": "var(--spacing-sm) var(--spacing-xl)",
+        "border_radius": "8px",
+        "cursor": "pointer",
+        "transition": "all 0.3s ease"
+      },
+      "hover": {
+        "background": "var(--cyan-10)",
+        "transform": "scale(1.05)",
+        "box_shadow": "0 0 20px var(--cyan-40)"
+      },
+      "focus": {
+        "outline": "2px solid var(--color-primary)",
+        "outline_offset": "2px"
+      },
+      "active": {
+        "background": "var(--cyan-20)",
+        "transform": "scale(1.02)"
+      }
+    },
+    "link": {
+      "default": {
+        "color": "var(--color-primary)",
+        "text_decoration": "none",
+        "cursor": "pointer",
+        "transition": "all 0.2s ease",
+        "position": "relative"
+      },
+      "hover": {
+        "color": "var(--color-bright)",
+        "text_shadow": "0 0 8px var(--cyan-40)",
+        "after_underline": "width: 100%"
+      },
+      "focus": {
+        "outline": "2px solid var(--color-primary)",
+        "outline_offset": "2px"
+      },
+      "after_pseudo": {
+        "content": "''",
+        "position": "absolute",
+        "bottom": "-2px",
+        "left": "0",
+        "width": "0%",
+        "height": "2px",
+        "background": "var(--color-primary)",
+        "transition": "width 0.3s ease"
+      }
+    },
+    "navbar_link": {
+      "default": {
+        "color": "var(--text-secondary)",
+        "cursor": "pointer",
+        "transition": "all 0.3s ease"
+      },
+      "hover": {
+        "color": "var(--color-primary)",
+        "text_shadow": "0 0 10px var(--cyan-40)"
+      },
+      "focus": {
+        "outline": "2px solid var(--color-primary)",
+        "outline_offset": "2px"
+      }
+    },
+    "sidebar_item": {
+      "default": {
+        "color": "var(--text-secondary)",
+        "cursor": "pointer",
+        "transition": "all 0.2s ease",
+        "border_radius": "6px"
+      },
+      "hover": {
+        "background": "var(--cyan-10)",
+        "color": "var(--color-primary)"
+      },
+      "focus": {
+        "outline": "2px solid var(--color-primary) inset",
+        "outline_offset": "-2px"
+      },
+      "active": {
+        "background": "var(--cyan-15)",
+        "color": "var(--color-primary)",
+        "border_left": "3px solid var(--color-primary)",
+        "font_weight": "600"
+      }
+    }
+  },
+  "performance_optimization": {
+    "gpu_acceleration": {
+      "properties": ["transform", "opacity", "box-shadow"],
+      "technique": "will-change: transform, box-shadow;",
+      "note": "Hints browser to prepare GPU layer for smooth 60fps animations"
+    },
+    "avoid_properties": {
+      "layout_triggering": ["width", "height", "top", "left", "margin", "padding"],
+      "recommendation": "Use transform: translate() instead of position offsets",
+      "performance_impact": "Layout recalculations cause jank, use transforms for smooth animations"
+    },
+    "conditional_animations": {
+      "shimmer": "Only animate on hover to save CPU/GPU when idle",
+      "pulse": "Use sparingly, only for important notifications"
+    }
+  },
+  "accessibility_requirements": {
+    "focus_indicators": {
+      "minimum_thickness": "2px",
+      "color": "var(--color-primary) for high contrast",
+      "offset": "2px for clear separation from element",
+      "wcag_level": "AA (2.4.7 Focus Visible)"
+    },
+    "keyboard_navigation": {
+      "tab_order": "Logical flow, left to right, top to bottom",
+      "enter_space": "Activate buttons and links",
+      "esc": "Close modals, dropdown menus"
+    },
+    "reduced_motion": {
+      "media_query": "@media (prefers-reduced-motion: reduce)",
+      "fallback": "Disable animations, use instant transitions",
+      "example": "transition: none; animation: none;"
+    }
+  },
+  "usage_notes": {
+    "cursor_pointer": "ALWAYS set cursor: pointer on interactive elements",
+    "smooth_transitions": "ALL transitions should be < 400ms for instant feel",
+    "multi_sensory_feedback": "Combine transform + color + shadow for clear interaction cues",
+    "focus_always_visible": "Never remove focus indicators for accessibility"
+  }
+}

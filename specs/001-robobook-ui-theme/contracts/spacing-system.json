@@ -1,0 +1,179 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RoboBook Spacing System",
+  "description": "8px base unit spacing scale with T-shirt sizing",
+  "version": "1.0.0",
+  "base_unit": {
+    "value": "8px",
+    "rem": "0.5rem",
+    "note": "All spacing values are multiples of 8px for visual rhythm"
+  },
+  "scale": {
+    "3xs": {
+      "multiplier": "0.25×",
+      "rem": "0.125rem",
+      "px": "2px",
+      "cssVar": "--spacing-3xs",
+      "usage": "Borders, fine details, separator lines"
+    },
+    "2xs": {
+      "multiplier": "0.5×",
+      "rem": "0.25rem",
+      "px": "4px",
+      "cssVar": "--spacing-2xs",
+      "usage": "Tight spacing, minimal gaps"
+    },
+    "xs": {
+      "multiplier": "1×",
+      "rem": "0.5rem",
+      "px": "8px",
+      "cssVar": "--spacing-xs",
+      "usage": "Component padding, button padding vertical"
+    },
+    "sm": {
+      "multiplier": "1.5×",
+      "rem": "0.75rem",
+      "px": "12px",
+      "cssVar": "--spacing-sm",
+      "usage": "Small gaps, icon spacing"
+    },
+    "md": {
+      "multiplier": "2×",
+      "rem": "1rem",
+      "px": "16px",
+      "cssVar": "--spacing-md",
+      "usage": "Default spacing, paragraph margins"
+    },
+    "lg": {
+      "multiplier": "3×",
+      "rem": "1.5rem",
+      "px": "24px",
+      "cssVar": "--spacing-lg",
+      "usage": "Section padding, card padding"
+    },
+    "xl": {
+      "multiplier": "4×",
+      "rem": "2rem",
+      "px": "32px",
+      "cssVar": "--spacing-xl",
+      "usage": "Large gaps, content spacing"
+    },
+    "2xl": {
+      "multiplier": "6×",
+      "rem": "3rem",
+      "px": "48px",
+      "cssVar": "--spacing-2xl",
+      "usage": "Major sections, page margins"
+    },
+    "3xl": {
+      "multiplier": "8×",
+      "rem": "4rem",
+      "px": "64px",
+      "cssVar": "--spacing-3xl",
+      "usage": "Page sections, large vertical rhythm"
+    },
+    "4xl": {
+      "multiplier": "12×",
+      "rem": "6rem",
+      "px": "96px",
+      "cssVar": "--spacing-4xl",
+      "usage": "Hero sections, major page divisions"
+    }
+  },
+  "component_spacing": {
+    "button": {
+      "padding_vertical": "var(--spacing-xs) to var(--spacing-sm)",
+      "padding_horizontal": "var(--spacing-lg) to var(--spacing-xl)",
+      "gap": "var(--spacing-sm)",
+      "example": "padding: var(--spacing-xs) var(--spacing-lg);"
+    },
+    "card": {
+      "padding": "var(--spacing-lg) to var(--spacing-2xl)",
+      "gap": "var(--spacing-md)",
+      "margin_bottom": "var(--spacing-lg) to var(--spacing-xl)",
+      "example": "padding: var(--spacing-lg); gap: var(--spacing-md);"
+    },
+    "navbar": {
+      "padding_vertical": "var(--spacing-md)",
+      "padding_horizontal": "var(--spacing-lg)",
+      "item_gap": "var(--spacing-md)",
+      "example": "padding: var(--spacing-md) var(--spacing-lg);"
+    },
+    "sidebar": {
+      "padding": "var(--spacing-md)",
+      "item_gap": "var(--spacing-xs)",
+      "section_gap": "var(--spacing-lg)",
+      "example": "padding: var(--spacing-md);"
+    },
+    "hero_section": {
+      "padding_vertical": "var(--spacing-4xl)",
+      "padding_horizontal": "var(--spacing-lg)",
+      "gap": "var(--spacing-3xl)",
+      "example": "padding: var(--spacing-4xl) var(--spacing-lg);"
+    },
+    "content_section": {
+      "padding_vertical": "var(--spacing-3xl)",
+      "padding_horizontal": "var(--spacing-lg)",
+      "gap": "var(--spacing-2xl)",
+      "example": "padding: var(--spacing-3xl) var(--spacing-lg);"
+    }
+  },
+  "grid_gaps": {
+    "tight": {
+      "value": "var(--spacing-md)",
+      "usage": "Dense grids, related content"
+    },
+    "normal": {
+      "value": "var(--spacing-lg)",
+      "usage": "Default grid spacing"
+    },
+    "relaxed": {
+      "value": "var(--spacing-xl) to var(--spacing-2xl)",
+      "usage": "Spacious grids, feature cards"
+    }
+  },
+  "responsive_adjustments": {
+    "mobile": {
+      "breakpoint": "< 768px",
+      "hero_padding": "var(--spacing-2xl) var(--spacing-md)",
+      "section_padding": "var(--spacing-xl) var(--spacing-md)",
+      "card_padding": "var(--spacing-md)",
+      "grid_gap": "var(--spacing-md)",
+      "note": "Reduce spacing on mobile for better space utilization"
+    },
+    "tablet": {
+      "breakpoint": "768px - 1023px",
+      "hero_padding": "var(--spacing-3xl) var(--spacing-lg)",
+      "section_padding": "var(--spacing-2xl) var(--spacing-lg)",
+      "card_padding": "var(--spacing-lg)",
+      "grid_gap": "var(--spacing-lg)"
+    },
+    "desktop": {
+      "breakpoint": ">= 1024px",
+      "hero_padding": "var(--spacing-4xl) var(--spacing-lg)",
+      "section_padding": "var(--spacing-3xl) var(--spacing-lg)",
+      "card_padding": "var(--spacing-lg) to var(--spacing-2xl)",
+      "grid_gap": "var(--spacing-xl) to var(--spacing-2xl)"
+    }
+  },
+  "usage_examples": {
+    "feature_card": {
+      "padding": "var(--spacing-2xl)",
+      "gap": "var(--spacing-md)",
+      "margin_bottom": "var(--spacing-lg)"
+    },
+    "button_primary": {
+      "padding": "var(--spacing-sm) var(--spacing-xl)",
+      "gap": "var(--spacing-sm)"
+    },
+    "section_header": {
+      "margin_bottom": "var(--spacing-2xl)",
+      "padding_bottom": "var(--spacing-md)"
+    }
+  },
+  "accessibility_notes": {
+    "touch_targets": "Minimum 44x44px for touch targets (use --spacing-lg for button padding)",
+    "visual_rhythm": "Consistent 8px grid creates predictable, scannable layouts",
+    "rem_units": "Uses rem for accessibility (respects user font size preferences)"
+  }
+}

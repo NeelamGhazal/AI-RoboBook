@@ -1,0 +1,392 @@
+/**
+ * Buttons Component
+ * RoboBook UI Theme - Tech Cyber
+ *
+ * Button styles with:
+ * - Primary/Secondary variants
+ * - Gradient backgrounds
+ * - Glow effects on hover
+ * - GPU-accelerated transforms
+ */
+
+/* ============================================
+   PRIMARY BUTTON
+   ============================================ */
+
+.btn-primary,
+.button--primary {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--radius-md);
+  border: none;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 4px 14px var(--cyan-40);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover,
+.button--primary:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-button);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.btn-primary:active,
+.button--primary:active {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   SECONDARY BUTTON
+   ============================================ */
+
+.btn-secondary,
+.button--secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-secondary:hover,
+.button--secondary:hover {
+  background: var(--cyan-10);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+.btn-secondary:active,
+.button--secondary:active {
+  transform: scale(1.02);
+}
+
+/* ============================================
+   OUTLINE BUTTON
+   ============================================ */
+
+.btn-outline,
+.button--outline {
+  background: transparent;
+  color: var(--color-secondary);
+  border: 2px solid var(--color-secondary);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-outline:hover,
+.button--outline:hover {
+  background: var(--cyan-10);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--cyan-40);
+  text-decoration: none;
+}
+
+/* ============================================
+   LINK BUTTON (Text-only)
+   ============================================ */
+
+.btn-link,
+.button--link {
+  background: transparent;
+  color: var(--color-primary);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+.btn-link::after,
+.button--link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width var(--transition-normal);
+}
+
+.btn-link:hover::after,
+.button--link:hover::after {
+  width: 100%;
+}
+
+.btn-link:hover,
+.button--link:hover {
+  color: var(--color-bright);
+  text-shadow: 0 0 8px var(--cyan-40);
+  text-decoration: none;
+}
+
+/* ============================================
+   ICON BUTTONS
+   ============================================ */
+
+.btn-icon,
+.button--icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: var(--radius-md);
+  background: var(--bg-accent);
+  border: 1px solid var(--cyan-20);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-icon:hover,
+.button--icon:hover {
+  background: var(--cyan-10);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: scale(1.1);
+}
+
+/* ============================================
+   BUTTON SIZES
+   ============================================ */
+
+/* Small */
+.btn-sm,
+.button--sm {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+/* Large */
+.btn-lg,
+.button--lg {
+  padding: var(--spacing-md) var(--spacing-2xl);
+  font-size: var(--font-size-lg);
+}
+
+/* ============================================
+   BUTTON STATES
+   ============================================ */
+
+/* Disabled */
+.btn:disabled,
+.button:disabled,
+.btn-disabled,
+.button--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading */
+.btn-loading,
+.button--loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.btn-loading::after,
+.button--loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid var(--text-primary);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: button-spinner 0.6s linear infinite;
+}
+
+@keyframes button-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   BUTTON GROUPS
+   ============================================ */
+
+.button-group {
+  display: inline-flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.button-group--vertical {
+  flex-direction: column;
+}
+
+/* Connected buttons (no gap) */
+.button-group--connected {
+  gap: 0;
+}
+
+.button-group--connected .button:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.button-group--connected .button:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-width: 0;
+}
+
+/* ============================================
+   DOCUSAURUS BUTTON OVERRIDES
+   ============================================ */
+
+/**
+ * Override default Docusaurus button styles
+ * to match RoboBook theme
+ */
+
+.button {
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  font-weight: var(--font-weight-semibold);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--cyan-40);
+}
+
+.button--primary {
+  background: var(--gradient-primary);
+  border: none;
+}
+
+.button--secondary {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.button--outline {
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+}
+
+/* ============================================
+   LINK HOVER EFFECTS
+   ============================================ */
+
+/**
+ * Enhanced link styling with underline animation
+ */
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-bright);
+  text-shadow: 0 0 8px var(--cyan-40);
+  text-decoration: none;
+}
+
+/* Animated underline */
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width var(--transition-normal);
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* Disable underline animation for specific links */
+.navbar__link::after,
+.menu__link::after,
+.button::after,
+.pagination-nav__link::after {
+  display: none;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 767px) {
+  .btn-primary,
+  .btn-secondary,
+  .button--primary,
+  .button--secondary {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-sm);
+  }
+
+  .btn-lg,
+  .button--lg {
+    padding: var(--spacing-sm) var(--spacing-xl);
+    font-size: var(--font-size-base);
+  }
+
+  .button-group {
+    width: 100%;
+  }
+
+  .button-group .button {
+    flex: 1;
+  }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATION
+   ============================================ */
+
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.button--primary,
+.button--secondary,
+.button--outline {
+  will-change: transform, box-shadow;
+}

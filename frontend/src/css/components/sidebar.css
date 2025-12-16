@@ -1,0 +1,419 @@
+/**
+ * Sidebar Component
+ * RoboBook UI Theme - Tech Cyber
+ *
+ * Documentation sidebar navigation with:
+ * - Active state indicators
+ * - Collapsible sections
+ * - Smooth hover effects
+ * - Table of Contents (TOC) styling
+ */
+
+/* ============================================
+   SIDEBAR CONTAINER
+   ============================================ */
+
+.menu {
+  background: var(--bg-secondary) !important;
+  padding: var(--spacing-md);
+}
+
+/* Docusaurus theme-aware sidebar container */
+.theme-doc-sidebar-container {
+  background: var(--bg-secondary) !important;
+  border-right: 1px solid var(--border-color) !important;
+}
+
+.menu__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ============================================
+   SIDEBAR MENU LINKS
+   ============================================ */
+
+.menu__link {
+  color: var(--text-secondary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  font-size: var(--font-size-base);
+  position: relative;
+  margin: var(--spacing-2xs) 0;
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  transform: none !important;
+}
+
+.menu__link:hover {
+  background: var(--cyan-10);
+  color: var(--color-primary) !important;
+  text-decoration: none;
+  transform: translateX(4px);
+}
+
+/* Active state with left border indicator */
+.menu__link--active {
+  background: var(--cyan-15);
+  color: var(--color-primary) !important;
+  border-left: 3px solid var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.menu__link--active:hover {
+  background: var(--cyan-20);
+}
+
+/* ============================================
+   SIDEBAR CATEGORY HEADERS
+   ============================================ */
+
+.menu__list-item--collapsed .menu__link--sublist-caret {
+  transform: rotate(0deg);
+}
+
+.menu__list-item:not(.menu__list-item--collapsed) .menu__link--sublist-caret {
+  transform: rotate(90deg);
+}
+
+.menu__link--sublist {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  padding: var(--spacing-md);
+  font-size: var(--font-size-base);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--spacing-md);
+  border-bottom: 1px solid var(--cyan-10);
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  transform: none !important;
+}
+
+.menu__link--sublist:hover {
+  color: var(--color-primary);
+  background: transparent;
+  transform: none;
+}
+
+.menu__link--sublist-caret {
+  transition: transform var(--transition-normal);
+}
+
+.menu__link--sublist-caret::before {
+  background: var(--cyan-60);
+}
+
+/* ============================================
+   COLLAPSIBLE SECTIONS
+   ============================================ */
+
+.menu__list-item--collapsed .menu__list {
+  height: 0;
+  overflow: hidden;
+}
+
+.menu__list-item:not(.menu__list-item--collapsed) .menu__list {
+  height: auto;
+}
+
+/* Visual grouping for module sections */
+.menu__list .menu__list {
+  background: var(--nested-bg);
+  border-left: 2px solid var(--cyan-20);
+  margin-left: var(--spacing-sm);
+  padding-left: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   BREADCRUMBS
+   ============================================ */
+
+.breadcrumbs {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--cyan-10);
+}
+
+.breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumbs__link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  font-size: var(--font-size-sm);
+}
+
+.breadcrumbs__link:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.breadcrumbs__item:not(:last-child)::after {
+  content: '/';
+  color: var(--text-muted);
+  margin: 0 var(--spacing-xs);
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================
+   TABLE OF CONTENTS (TOC)
+   ============================================ */
+
+.table-of-contents {
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--cyan-10);
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + var(--spacing-lg));
+}
+
+.table-of-contents__heading {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--cyan-10);
+}
+
+.table-of-contents ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.table-of-contents li {
+  margin: var(--spacing-xs) 0;
+}
+
+.table-of-contents__link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  display: block;
+  padding: var(--spacing-2xs) var(--spacing-sm);
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.table-of-contents__link:hover {
+  color: var(--color-primary);
+  border-left-color: var(--color-primary);
+  background: var(--cyan-10);
+  text-decoration: none;
+}
+
+.table-of-contents__link--active {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  border-left-color: var(--color-primary);
+  background: var(--cyan-10);
+}
+
+/* Nested TOC items */
+.table-of-contents ul ul {
+  margin-left: var(--spacing-md);
+  margin-top: var(--spacing-xs);
+}
+
+/* ============================================
+   SIDEBAR MOBILE SLIDE-IN
+   ============================================ */
+
+@media (max-width: 996px) {
+  .sidebar {
+    position: fixed;
+    top: var(--ifm-navbar-height);
+    left: -100%;
+    width: 280px;
+    height: calc(100vh - var(--ifm-navbar-height));
+    background: var(--bg-primary);
+    border-right: 1px solid var(--cyan-10);
+    transition: left var(--transition-normal);
+    overflow-y: auto;
+    z-index: 50;
+    box-shadow: 2px 0 8px var(--shadow-color);
+  }
+
+  .sidebar--show {
+    left: 0;
+  }
+
+  .menu {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* ============================================
+   DOC SIDEBAR (Main Documentation Sidebar)
+   ============================================ */
+
+.theme-doc-sidebar-container {
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--cyan-10);
+}
+
+.sidebar {
+  padding: var(--spacing-lg);
+}
+
+/* ============================================
+   PAGINATION (Previous/Next Buttons)
+   ============================================ */
+
+.pagination-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--cyan-10);
+}
+
+.pagination-nav__link {
+  background: var(--bg-secondary);
+  border: 1px solid var(--cyan-20);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-4px);
+  text-decoration: none;
+}
+
+.pagination-nav__sublabel {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.pagination-nav__label {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.pagination-nav__link:hover .pagination-nav__label {
+  color: var(--color-primary);
+}
+
+/* Arrow indicators */
+.pagination-nav__link--prev::before,
+.pagination-nav__link--next::after {
+  content: '→';
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all var(--transition-normal);
+}
+
+.pagination-nav__link--prev::before {
+  content: '←';
+  left: var(--spacing-lg);
+}
+
+.pagination-nav__link--next::after {
+  right: var(--spacing-lg);
+}
+
+.pagination-nav__link:hover::before,
+.pagination-nav__link:hover::after {
+  color: var(--color-bright);
+}
+
+/* Mobile responsive pagination */
+@media (max-width: 767px) {
+  .pagination-nav {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATION
+   ============================================ */
+
+.menu__link,
+.table-of-contents__link,
+.pagination-nav__link {
+  will-change: transform, background-color;
+}
+
+/* ============================================
+   THEME-SPECIFIC OVERRIDES
+   ============================================ */
+
+/* Dark Mode Sidebar */
+html[data-theme='dark'] .theme-doc-sidebar-container,
+html[data-theme='dark'] .menu {
+  background: #1a1f3a !important;
+}
+
+html[data-theme='dark'] .menu__link {
+  color: #e5e7eb !important;
+}
+
+html[data-theme='dark'] .menu__link:hover {
+  background: rgba(0, 212, 255, 0.1) !important;
+  color: #00d4ff !important;
+}
+
+html[data-theme='dark'] .menu__link--active {
+  background: rgba(0, 212, 255, 0.15) !important;
+  color: #00d4ff !important;
+}
+
+/* Light Mode Sidebar */
+html[data-theme='light'] .theme-doc-sidebar-container,
+html[data-theme='light'] .menu {
+  background: #e0f2fe !important;
+}
+
+html[data-theme='light'] .menu__link {
+  color: #0e7490 !important;
+}
+
+html[data-theme='light'] .menu__link:hover {
+  background: rgba(2, 132, 199, 0.08) !important;
+  color: #0284c7 !important;
+}
+
+html[data-theme='light'] .menu__link--active {
+  background: rgba(2, 132, 199, 0.15) !important;
+  color: #0284c7 !important;
+}
