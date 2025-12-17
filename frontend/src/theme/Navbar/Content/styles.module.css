@@ -13,3 +13,16 @@ See https://github.com/facebook/docusaurus/pull/11142
 :global(.navbar__items--right) > :last-child {
   padding-right: 0;
 }
+
+/* Desktop items container - visible on desktop, hidden on mobile */
+.desktopItems {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (max-width: 996px) {
+  .desktopItems {
+    display: none;
+  }
+}

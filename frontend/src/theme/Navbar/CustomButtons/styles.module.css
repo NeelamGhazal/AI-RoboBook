@@ -90,6 +90,7 @@
 }
 
 @media (max-width: 767px) {
+  /* Hide text labels on mobile (navbar only) */
   .signInBtn span,
   .signUpBtn span {
     display: none;
@@ -106,5 +107,18 @@
   .signUpBtn svg {
     width: 16px;
     height: 16px;
+  }
+
+  /* EXCEPTION: Show text when inside mobile menu */
+  :global([class*='menuItems']) .signInBtn span,
+  :global([class*='menuItems']) .signUpBtn span {
+    display: inline;
+  }
+
+  :global([class*='menuItems']) .signInBtn,
+  :global([class*='menuItems']) .signUpBtn {
+    padding: 0.75rem 1rem !important;
+    width: 100%;
+    min-width: auto;
   }
 }

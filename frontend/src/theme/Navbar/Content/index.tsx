@@ -16,6 +16,7 @@ import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
 import {SignInButton, SignUpButton} from '@theme/Navbar/CustomButtons';
+import {MobileMenuToggle} from '@theme/Navbar/MobileMenu';
 
 import styles from './styles.module.css';
 
@@ -93,15 +94,21 @@ export default function NavbarContent(): ReactNode {
       right={
         // Custom RoboBook navbar layout: Search, Sign In, Sign Up, Theme Toggle
         <>
-          {!searchBarItem && (
-            <NavbarSearch>
-              <SearchBar />
-            </NavbarSearch>
-          )}
-          <SignInButton />
-          <SignUpButton />
-          <NavbarColorModeToggle className={styles.colorModeToggle} />
-          <NavbarItems items={rightItems} />
+          {/* Desktop: show all items */}
+          <div className={styles.desktopItems}>
+            {!searchBarItem && (
+              <NavbarSearch>
+                <SearchBar />
+              </NavbarSearch>
+            )}
+            <SignInButton />
+            <SignUpButton />
+            <NavbarColorModeToggle className={styles.colorModeToggle} />
+            <NavbarItems items={rightItems} />
+          </div>
+
+          {/* Mobile: show hamburger menu toggle */}
+          <MobileMenuToggle />
         </>
       }
     />
