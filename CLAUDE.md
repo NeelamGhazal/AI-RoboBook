@@ -208,3 +208,9 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- Python 3.11+ (003-rag-chatbot-backend)
+
+## Recent Changes
+- 003-rag-chatbot-backend: Added Python 3.11+

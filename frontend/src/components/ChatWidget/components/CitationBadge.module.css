@@ -1,0 +1,92 @@
+/**
+ * Citation Badge Styles - Tech Cyber Theme
+ */
+
+@import '../styles/variables.module.css';
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chat-spacing-xs);
+  padding: 4px 10px;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: var(--chat-border-radius-sm);
+  color: var(--chat-primary-cyan);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--chat-transition-fast);
+  text-decoration: none;
+}
+
+.number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: var(--chat-primary-cyan);
+  color: var(--chat-card-bg);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.text {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Hover Effect - Mandatory Shimmer & Glow */
+.badge:hover {
+  transform: scale(1.05);
+  background: rgba(0, 255, 255, 0.2);
+  border-color: var(--chat-primary-cyan);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+}
+
+.badge:hover .number {
+  animation: shimmer 1.5s linear infinite;
+  background: linear-gradient(
+    90deg,
+    var(--chat-primary-cyan) 0%,
+    var(--chat-secondary-blue) 50%,
+    var(--chat-primary-cyan) 100%
+  );
+  background-size: 200% 100%;
+}
+
+.badge:active {
+  transform: scale(0.98);
+}
+
+.badge:focus-visible {
+  outline: 2px solid var(--chat-primary-cyan);
+  outline-offset: 2px;
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .badge {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .text {
+    max-width: 120px;
+  }
+}

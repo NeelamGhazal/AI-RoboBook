@@ -1,0 +1,54 @@
+/**
+ * Chat Panel Styles - Tech Cyber Theme
+ */
+
+@import '../styles/variables.module.css';
+
+.panel {
+  position: fixed;
+  bottom: calc(var(--chat-toggle-size) + var(--chat-spacing-lg) + var(--chat-spacing-md));
+  right: var(--chat-spacing-lg);
+  width: var(--chat-panel-width);
+  height: var(--chat-panel-height);
+  max-height: var(--chat-panel-max-height);
+  background: var(--chat-panel-bg);
+  border-radius: var(--chat-border-radius-lg);
+  box-shadow: var(--chat-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: var(--chat-z-panel);
+  backdrop-filter: var(--chat-glass-blur);
+  border: 1px solid var(--chat-glass-border);
+  animation: slideInRight var(--chat-transition-normal) ease-out;
+}
+
+/* Slide In Animation */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive - Full Width */
+@media (max-width: 768px) {
+  .panel {
+    bottom: calc(var(--chat-toggle-size-mobile) + var(--chat-spacing-md) + var(--chat-spacing-sm));
+    right: var(--chat-spacing-md);
+    left: var(--chat-spacing-md);
+    width: auto;
+    max-height: 70vh;
+  }
+}
+
+/* Tablet - Slightly Smaller */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .panel {
+    width: 360px;
+  }
+}

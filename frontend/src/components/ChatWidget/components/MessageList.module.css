@@ -1,0 +1,87 @@
+/**
+ * Message List Styles - Tech Cyber Theme
+ */
+
+@import '../styles/variables.module.css';
+
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--chat-spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--chat-spacing-sm);
+  background: var(--chat-card-bg);
+}
+
+/* Custom Scrollbar - Cyber Theme */
+.container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: var(--chat-primary-cyan);
+  border-radius: 3px;
+  opacity: 0.6;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: var(--chat-secondary-blue);
+  opacity: 1;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: var(--chat-spacing-xl);
+  text-align: center;
+}
+
+.emptyIcon {
+  color: var(--chat-primary-cyan);
+  opacity: 0.4;
+  margin-bottom: var(--chat-spacing-md);
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--chat-text-primary);
+  margin: 0 0 var(--chat-spacing-sm) 0;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: var(--chat-text-secondary);
+  margin: 0;
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--chat-spacing-md);
+  }
+
+  .emptyState {
+    padding: var(--chat-spacing-lg);
+  }
+
+  .emptyTitle {
+    font-size: 16px;
+  }
+
+  .emptyText {
+    font-size: 13px;
+  }
+}

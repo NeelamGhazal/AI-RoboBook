@@ -1,0 +1,131 @@
+/**
+ * CSS Variables for Chat Widget - Tech Cyber Theme
+ *
+ * These variables ensure visual consistency with the RoboBook theme
+ * and provide fallback values for robustness.
+ */
+
+:root {
+  /* Primary Colors - Tech Cyber Theme */
+  --chat-primary-cyan: var(--primary-cyan, #00ffff);
+  --chat-secondary-blue: var(--secondary-blue, #0077ff);
+  --chat-accent-purple: var(--accent-purple, #a855f7);
+
+  /* Background Colors */
+  --chat-card-bg: var(--card-bg, rgba(15, 23, 42, 0.95));
+  --chat-card-bg-light: rgba(30, 41, 59, 0.95);
+  --chat-panel-bg: rgba(15, 23, 42, 0.98);
+
+  /* Text Colors */
+  --chat-text-primary: rgba(255, 255, 255, 0.95);
+  --chat-text-secondary: rgba(255, 255, 255, 0.75);
+  --chat-text-muted: rgba(255, 255, 255, 0.5);
+
+  /* Glassmorphism */
+  --chat-glass-bg: rgba(30, 41, 59, 0.7);
+  --chat-glass-border: rgba(0, 255, 255, 0.2);
+  --chat-glass-blur: blur(10px);
+
+  /* Gradients */
+  --chat-gradient-primary: linear-gradient(135deg, var(--chat-primary-cyan) 0%, var(--chat-secondary-blue) 100%);
+  --chat-gradient-secondary: linear-gradient(135deg, var(--chat-secondary-blue) 0%, var(--chat-accent-purple) 100%);
+
+  /* Shadows */
+  --chat-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --chat-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --chat-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --chat-shadow-glow-cyan: 0 0 20px rgba(0, 255, 255, 0.6);
+  --chat-shadow-glow-cyan-strong: 0 0 30px rgba(0, 255, 255, 0.8);
+
+  /* Borders */
+  --chat-border-radius-sm: 8px;
+  --chat-border-radius-md: 12px;
+  --chat-border-radius-lg: 16px;
+  --chat-border-radius-full: 9999px;
+
+  /* Spacing */
+  --chat-spacing-xs: 4px;
+  --chat-spacing-sm: 8px;
+  --chat-spacing-md: 16px;
+  --chat-spacing-lg: 24px;
+  --chat-spacing-xl: 32px;
+
+  /* Dimensions */
+  --chat-toggle-size: 56px;
+  --chat-toggle-size-mobile: 48px;
+  --chat-panel-width: 400px;
+  --chat-panel-height: 600px;
+  --chat-panel-max-height: 80vh;
+  --chat-header-height: 64px;
+  --chat-input-height: 80px;
+
+  /* Animations */
+  --chat-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --chat-transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --chat-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-Index Layers */
+  --chat-z-base: 1000;
+  --chat-z-toggle: 1001;
+  --chat-z-panel: 1002;
+  --chat-z-tooltip: 1003;
+
+  /* Mobile Breakpoints */
+  --chat-breakpoint-mobile: 768px;
+  --chat-breakpoint-tablet: 1024px;
+}
+
+/* Light Mode Overrides (if needed) */
+[data-theme='light'] {
+  --chat-card-bg: rgba(255, 255, 255, 0.95);
+  --chat-card-bg-light: rgba(248, 250, 252, 0.95);
+  --chat-panel-bg: rgba(255, 255, 255, 0.98);
+  --chat-text-primary: rgba(15, 23, 42, 0.95);
+  --chat-text-secondary: rgba(51, 65, 85, 0.9);
+  --chat-text-muted: rgba(100, 116, 139, 0.8);
+  --chat-glass-bg: rgba(248, 250, 252, 0.8);
+}
+
+/* Shimmer Animation Keyframes */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Pulse Animation for Typing Indicator */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Slide In Animation for Panel */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Slide Out Animation for Panel */
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,478 @@
+openapi: 3.1.0
+info:
+  title: RAG Chatbot Backend API
+  description: |
+    Intelligent Q&A system for Physical AI & Humanoid Robotics textbook.
+    Supports general Q&A, selected-text contextual queries, and conversation history.
+  version: 1.0.0
+  contact:
+    name: RoboBook Team
+    url: https://github.com/NeelamGhazal/AI-RoboBook
+
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+  - url: https://api.robobook.example.com
+    description: Production server (TBD)
+
+tags:
+  - name: sessions
+    description: Session management operations
+  - name: chat
+    description: Q&A and conversation endpoints
+  - name: health
+    description: Health check and monitoring
+
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Returns service health status and dependency checks
+      tags: [health]
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          description: Service degraded or unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /sessions:
+    post:
+      summary: Create new chat session
+      description: Initializes a new conversation session and returns session ID
+      tags: [sessions]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+      responses:
+        '201':
+          description: Session created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /chat:
+    post:
+      summary: General Q&A about textbook content
+      description: |
+        Asks a question about any textbook content using full vector search.
+        Returns answer with citations and confidence scores.
+      tags: [chat]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Answer generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/StreamingChatResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /chat/selected:
+    post:
+      summary: Q&A based on selected text
+      description: |
+        Asks a question focused on user-selected text passage.
+        Retrieval is filtered/weighted toward the provided text context.
+      tags: [chat]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectedTextChatRequest'
+      responses:
+        '200':
+          description: Answer generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Invalid request (missing selected_text or question)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /chat/history:
+    get:
+      summary: Retrieve conversation history
+      description: |
+        Returns all messages for a given session, ordered chronologically.
+        Includes both user questions and assistant answers with citations.
+      tags: [chat]
+      parameters:
+        - name: session_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Session identifier
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+          description: Maximum number of messages to return
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+          description: Number of messages to skip (pagination)
+      responses:
+        '200':
+          description: Chat history retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatHistoryResponse'
+        '404':
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required: [status, timestamp]
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+          description: Overall service health status
+        timestamp:
+          type: string
+          format: date-time
+          description: Health check timestamp
+        dependencies:
+          type: object
+          properties:
+            postgres:
+              type: string
+              enum: [up, down]
+            qdrant:
+              type: string
+              enum: [up, down]
+            openai:
+              type: string
+              enum: [up, down]
+        version:
+          type: string
+          description: API version
+
+    CreateSessionRequest:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: Optional user identifier from frontend auth
+          maxLength: 255
+        metadata:
+          type: object
+          description: Optional session metadata
+          additionalProperties: true
+
+    SessionResponse:
+      type: object
+      required: [session_id, created_at]
+      properties:
+        session_id:
+          type: string
+          format: uuid
+          description: Unique session identifier
+        created_at:
+          type: string
+          format: date-time
+          description: Session creation timestamp
+
+    ChatRequest:
+      type: object
+      required: [session_id, question]
+      properties:
+        session_id:
+          type: string
+          format: uuid
+          description: Session identifier
+        question:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          description: User's question about textbook content
+        stream:
+          type: boolean
+          default: false
+          description: Enable streaming response (SSE)
+
+    SelectedTextChatRequest:
+      type: object
+      required: [session_id, question, selected_text]
+      properties:
+        session_id:
+          type: string
+          format: uuid
+          description: Session identifier
+        question:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          description: User's question about the selected text
+        selected_text:
+          type: string
+          minLength: 10
+          maxLength: 5000
+          description: User-highlighted text passage
+        stream:
+          type: boolean
+          default: false
+          description: Enable streaming response (SSE)
+
+    ChatResponse:
+      type: object
+      required: [message_id, session_id, answer, citations, timestamp]
+      properties:
+        message_id:
+          type: string
+          format: uuid
+          description: Unique message identifier
+        session_id:
+          type: string
+          format: uuid
+          description: Session identifier
+        answer:
+          type: string
+          description: Generated answer text
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+          description: Source references with confidence scores
+        timestamp:
+          type: string
+          format: date-time
+          description: Response timestamp
+        metadata:
+          type: object
+          properties:
+            retrieval_time_ms:
+              type: integer
+              description: Vector search latency
+            generation_time_ms:
+              type: integer
+              description: LLM generation latency
+            total_time_ms:
+              type: integer
+              description: End-to-end latency
+            token_count:
+              type: integer
+              description: Tokens used in response
+            top_k:
+              type: integer
+              description: Number of chunks retrieved
+            avg_confidence:
+              type: number
+              format: float
+              description: Average confidence score of citations
+
+    StreamingChatResponse:
+      type: object
+      description: |
+        Server-Sent Events stream. Each event is a JSON object with type and data.
+        Event types: token, citation, complete, error.
+      properties:
+        type:
+          type: string
+          enum: [token, citation, complete, error]
+        data:
+          oneOf:
+            - type: object
+              description: Token event
+              properties:
+                token:
+                  type: string
+            - $ref: '#/components/schemas/Citation'
+            - $ref: '#/components/schemas/ChatResponse'
+            - $ref: '#/components/schemas/ErrorResponse'
+
+    Citation:
+      type: object
+      required: [chunk_id, chapter, section, url, confidence_score]
+      properties:
+        chunk_id:
+          type: string
+          format: uuid
+          description: Reference to vector database chunk
+        chapter:
+          type: string
+          description: Chapter path (e.g., module1/chapter1)
+        section:
+          type: string
+          description: Section heading
+        url:
+          type: string
+          format: uri
+          description: Clickable link to textbook page
+        confidence_score:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Relevance score from vector search
+        text_snippet:
+          type: string
+          maxLength: 200
+          description: Preview of source text
+
+    ChatHistoryResponse:
+      type: object
+      required: [session_id, messages, total, limit, offset]
+      properties:
+        session_id:
+          type: string
+          format: uuid
+          description: Session identifier
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoryMessage'
+          description: Chronologically ordered messages
+        total:
+          type: integer
+          description: Total number of messages in session
+        limit:
+          type: integer
+          description: Number of messages returned
+        offset:
+          type: integer
+          description: Pagination offset
+
+    HistoryMessage:
+      type: object
+      required: [message_id, role, content, timestamp]
+      properties:
+        message_id:
+          type: string
+          format: uuid
+          description: Unique message identifier
+        role:
+          type: string
+          enum: [user, assistant, system]
+          description: Message sender role
+        content:
+          type: string
+          description: Message text
+        timestamp:
+          type: string
+          format: date-time
+          description: Message timestamp
+        selected_text:
+          type: string
+          description: User-highlighted text (if applicable)
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+          description: Source references (assistant messages only)
+        token_count:
+          type: integer
+          description: Tokens used in message
+
+    ErrorResponse:
+      type: object
+      required: [error, message, timestamp]
+      properties:
+        error:
+          type: string
+          description: Error code
+          enum:
+            - invalid_request
+            - session_not_found
+            - rate_limit_exceeded
+            - internal_error
+            - service_unavailable
+        message:
+          type: string
+          description: Human-readable error description
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp
+        details:
+          type: object
+          description: Additional error context
+          additionalProperties: true
+
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Optional API key for production environments
+
+security:
+  - apiKey: []
+  - {}  # Allow unauthenticated access (configurable)

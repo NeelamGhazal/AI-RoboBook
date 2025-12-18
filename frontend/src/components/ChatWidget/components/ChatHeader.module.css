@@ -1,0 +1,82 @@
+/**
+ * Chat Header Styles - Tech Cyber Theme
+ */
+
+@import '../styles/variables.module.css';
+
+.header {
+  height: var(--chat-header-height);
+  padding: var(--chat-spacing-md) var(--chat-spacing-lg);
+  background: var(--chat-gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--chat-glass-border);
+  flex-shrink: 0;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--chat-spacing-xs);
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.2;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: var(--chat-border-radius-sm);
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.closeButton {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border-radius: var(--chat-border-radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--chat-transition-fast);
+  flex-shrink: 0;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.closeButton:active {
+  transform: scale(0.95);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .header {
+    padding: var(--chat-spacing-md);
+  }
+
+  .title {
+    font-size: 16px;
+  }
+}

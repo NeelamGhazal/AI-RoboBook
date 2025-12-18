@@ -52,3 +52,26 @@ i18n/*/docusaurus-plugin-content-docs/current.json
 # Git LFS
 # (Do NOT ignore *.png, *.jpg - those are tracked with LFS)
 .claude/settings.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv
+*.egg-info/
+.eggs/
+dist/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+*.cover

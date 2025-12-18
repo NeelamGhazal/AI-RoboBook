@@ -1,0 +1,125 @@
+/**
+ * Input Bar Styles - Tech Cyber Theme
+ */
+
+@import '../styles/variables.module.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--chat-spacing-sm);
+  padding: var(--chat-spacing-md) var(--chat-spacing-lg);
+  background: var(--chat-card-bg-light);
+  border-top: 1px solid var(--chat-glass-border);
+  flex-shrink: 0;
+}
+
+.selectedTextBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--chat-spacing-sm);
+  padding: var(--chat-spacing-sm) var(--chat-spacing-md);
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: var(--chat-border-radius-sm);
+  font-size: 12px;
+  color: var(--chat-text-secondary);
+}
+
+.badgeIcon {
+  flex-shrink: 0;
+}
+
+.badgeText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inputContainer {
+  display: flex;
+  gap: var(--chat-spacing-sm);
+  align-items: flex-end;
+}
+
+.textarea {
+  flex: 1;
+  min-height: 40px;
+  max-height: 120px;
+  padding: var(--chat-spacing-sm) var(--chat-spacing-md);
+  background: var(--chat-glass-bg);
+  border: 1px solid var(--chat-glass-border);
+  border-radius: var(--chat-border-radius-md);
+  color: var(--chat-text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  transition: all var(--chat-transition-fast);
+  backdrop-filter: var(--chat-glass-blur);
+}
+
+.textarea:focus {
+  border-color: var(--chat-primary-cyan);
+  box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.1);
+}
+
+.textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.textarea::placeholder {
+  color: var(--chat-text-muted);
+}
+
+.sendButton {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  background: var(--chat-gradient-primary);
+  color: white;
+  border-radius: var(--chat-border-radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--chat-transition-fast);
+}
+
+.sendButton:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: var(--chat-shadow-glow-cyan);
+}
+
+.sendButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.sendButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sendButton:focus-visible {
+  outline: 2px solid var(--chat-primary-cyan);
+  outline-offset: 2px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--chat-spacing-md);
+  }
+
+  .textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  .sendButton {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

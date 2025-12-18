@@ -1,0 +1,65 @@
+/**
+ * Chat Toggle Button Styles - Tech Cyber Theme
+ */
+
+@import '../styles/variables.module.css';
+
+.toggleButton {
+  position: fixed;
+  bottom: var(--chat-spacing-lg);
+  right: var(--chat-spacing-lg);
+  width: var(--chat-toggle-size);
+  height: var(--chat-toggle-size);
+  border-radius: var(--chat-border-radius-full);
+  border: none;
+  background: var(--chat-gradient-primary);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--chat-shadow-md);
+  transition: all var(--chat-transition-normal);
+  z-index: var(--chat-z-toggle);
+  outline: none;
+}
+
+/* Hover Effect - Mandatory Shimmer & Glow */
+.toggleButton:hover {
+  transform: scale(1.05);
+  box-shadow: var(--chat-shadow-glow-cyan-strong);
+  background: var(--chat-gradient-primary);
+  background-size: 200% 200%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Focus State - Accessibility */
+.toggleButton:focus-visible {
+  outline: 2px solid var(--chat-primary-cyan);
+  outline-offset: 4px;
+}
+
+/* Active State */
+.toggleButton:active {
+  transform: scale(0.95);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .toggleButton {
+    width: var(--chat-toggle-size-mobile);
+    height: var(--chat-toggle-size-mobile);
+    bottom: var(--chat-spacing-md);
+    right: var(--chat-spacing-md);
+  }
+}
+
+/* Shimmer Animation (imported from variables.module.css) */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}

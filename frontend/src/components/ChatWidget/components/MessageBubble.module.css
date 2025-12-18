@@ -1,0 +1,82 @@
+/**
+ * Message Bubble Styles - Tech Cyber Theme
+ */
+
+@import '../styles/variables.module.css';
+
+.bubble {
+  max-width: 85%;
+  margin-bottom: var(--chat-spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--chat-spacing-sm);
+  animation: fadeIn var(--chat-transition-fast) ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userBubble {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.assistantBubble {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.content {
+  padding: var(--chat-spacing-md);
+  border-radius: var(--chat-border-radius-md);
+  word-wrap: break-word;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.userBubble .content {
+  background: var(--chat-gradient-primary);
+  color: white;
+  border-bottom-right-radius: var(--chat-spacing-xs);
+}
+
+.assistantBubble .content {
+  background: var(--chat-glass-bg);
+  color: var(--chat-text-primary);
+  border: 1px solid var(--chat-glass-border);
+  border-bottom-left-radius: var(--chat-spacing-xs);
+  backdrop-filter: var(--chat-glass-blur);
+}
+
+.citations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--chat-spacing-xs);
+  padding: 0 var(--chat-spacing-sm);
+}
+
+.timestamp {
+  font-size: 11px;
+  color: var(--chat-text-muted);
+  padding: 0 var(--chat-spacing-sm);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .bubble {
+    max-width: 90%;
+  }
+
+  .content {
+    font-size: 13px;
+    padding: var(--chat-spacing-sm) var(--chat-spacing-md);
+  }
+}
