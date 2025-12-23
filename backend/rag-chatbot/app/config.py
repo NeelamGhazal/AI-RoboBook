@@ -4,6 +4,7 @@ All environment variables are loaded and validated here.
 """
 from typing import List
 from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
 
 
 class Settings(BaseSettings):
@@ -32,7 +33,8 @@ class Settings(BaseSettings):
     API_RELOAD: bool = False
 
     # CORS Configuration (comma-separated origins)
-    CORS_ORIGINS: str = "http://localhost:3000"
+    # Add your frontend deploy URL here
+    CORS_ORIGINS: str = "http://localhost:3000,https://af1596ea.ai-robo-textbook.pages.dev/
 
     # Rate Limiting
     RATE_LIMIT_PER_MINUTE: int = 10
@@ -49,8 +51,18 @@ class Settings(BaseSettings):
 
     @property
     def cors_origins_list(self) -> List[str]:
-        """Parse CORS origins from comma-separated string."""
-        return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
+        """
+        Parse CORS origins from comma-separated string.
+        This will automatically allow both localhost (dev) and deployed frontend.
+        """
+        origins = [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
+
+        # Optional: dynamically add frontend URL from env variable if present
+        frontend_url = os.environ.get("FRONTEND_URL")
+        if frontend_url and frontend_url not in origins:
+            origins.append(frontend_url.strip())
+
+        return origins
 
 
 # Global settings instance
