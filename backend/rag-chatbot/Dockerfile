@@ -18,8 +18,9 @@ RUN mkdir -p logs
 
 EXPOSE 8000
 
+# Health check (agar /health endpoint hai to rakh lo, warna comment kar do)
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD python -c "import httpx; exit(0 if httpx.get('http://localhost:8000/health', timeout=5.0).status_code == 200 else 1)" || exit 1
 
-# Ye line change ki – ab $PORT properly expand hoga aur error nahi aayega
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port $PORT"]
+# Ye final CMD – ab error nahi aayega!
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
