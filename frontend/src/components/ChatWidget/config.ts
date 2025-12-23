@@ -17,7 +17,7 @@ function getApiUrl(): string {
 
   // Fallback to localhost for development
   // TODO: In production, set window.CHAT_API_URL or update this to production URL
-  return 'http://localhost:8000';
+  return 'https://proud-nourishment-production-7f99.up.railway.app/';
 }
 
 /**
