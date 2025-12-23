@@ -15,6 +15,8 @@ from app.clients.qdrant_client import qdrant_client
 from app.config import settings
 from app.utils.logging import get_logger
 from app.utils.metrics import CONCURRENT_REQUESTS, ERROR_COUNTER, REQUEST_DURATION
+import os
+import uvicorn
 
 logger = get_logger(__name__)
 
@@ -194,15 +196,11 @@ app.mount("/metrics", metrics_app)
 
 # =============== RAILWAY-FRIENDLY STARTUP BLOCK ===============
 if __name__ == "__main__":
-    import uvicorn
-    import os
-
-    # Railway ka PORT use karo, fallback 8000 local ke liye
-    port = int(os.environ.get("PORT", 8000))
-
+    # Railway automatically sets PORT env variable
+    port = int(os.environ.get("PORT", 8000))  # fallback 8000 for local dev
     uvicorn.run(
-        "app.main:app",          # Module path sahi rakha
-        host="0.0.0.0",          # Zaruri Railway pe
+        "app.main:app",
+        host="0.0.0.0",
         port=port,
-        log_level="info",        # Clean logs
+        log_level="info",
     )
