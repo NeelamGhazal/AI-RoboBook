@@ -1,36 +1,38 @@
+# ===== Base Image =====
 FROM python:3.11-slim
 
+# ===== Working Directory =====
 WORKDIR /app
 
-# System dependencies
+# ===== System Dependencies =====
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip
+# ===== Upgrade pip =====
 RUN pip install --no-cache-dir --upgrade pip
 
-# Install compatible heavy packages
-RUN pip install --no-cache-dir torch==2.4.0+cpu torchvision==0.21.0+cpu --index-url https://download.pytorch.org/whl/cpu
-RUN pip install --no-cache-dir sentence-transformers==2.2.2
+# ===== Install Heavy Packages (compatible versions) =====
+RUN pip install --no-cache-dir torch==2.6.0+cpu torchvision==0.21.0+cpu --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir sentence-transformers==2.2.2 httpx
 
-# Copy light requirements and install
+# ===== Install other requirements =====
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# ===== Copy Application Code =====
 COPY app/ ./app/
 COPY scripts/ ./scripts/
 
-# Create logs folder
+# ===== Create Logs Folder =====
 RUN mkdir -p logs
 
-# Expose port
+# ===== Expose Port =====
 EXPOSE 8000
 
-# Healthcheck (agar /health endpoint hai to rakh lo)
+# ===== Healthcheck =====
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD python -c "import httpx; exit(0 if httpx.get('http://localhost:8000/health', timeout=5.0).status_code == 200 else 1)" || exit 1
 
-# Start the app
+# ===== Start the App =====
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
