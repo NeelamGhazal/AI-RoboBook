@@ -1,4 +1,3 @@
-# Base image
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -11,8 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Upgrade pip
 RUN pip install --no-cache-dir --upgrade pip
 
-# Pre-install heavy packages separately (to avoid Railway build timeout)
-RUN pip install --no-cache-dir torch==2.2.0+cpu torchvision==0.19.0+cpu --index-url https://download.pytorch.org/whl/cpu
+# Install compatible heavy packages
+RUN pip install --no-cache-dir torch==2.4.0+cpu torchvision==0.21.0+cpu --index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir sentence-transformers==2.2.2
 
 # Copy light requirements and install
