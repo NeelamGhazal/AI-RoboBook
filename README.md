@@ -1,5 +1,11 @@
 # 🤖 PhyAI Humanoid Textbook
 
+## Demo Video
+
+Watch the full demo here:
+
+https://www.youtube.com/watch?v=Bw8NGBsfcl4
+
 > **An AI-Powered Interactive Learning Platform for Humanoid Robotics**
 > Built with React, FastAPI, and Local LLMs for Zero-Cost, Privacy-First Education
 
