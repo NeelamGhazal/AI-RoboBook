@@ -111,21 +111,24 @@ class QdrantClient:
         """
         try:
             results = await asyncio.to_thread(
-                self.client.search,
+                self.client.query_points,
                 collection_name=self.collection_name,
-                query_vector=query_vector,
+                query=query_vector,
                 limit=limit,
                 score_threshold=score_threshold,
             )
 
+            # query_points returns QueryResponse, extract points
+            points = results.points if hasattr(results, 'points') else results
+
             logger.debug(
                 "qdrant_search_complete",
-                results_count=len(results),
+                results_count=len(points),
                 limit=limit,
                 threshold=score_threshold,
             )
 
-            return results
+            return points
 
         except Exception as e:
             logger.error("qdrant_search_failed", error=str(e))

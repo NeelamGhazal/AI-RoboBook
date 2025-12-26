@@ -10,10 +10,10 @@ import os
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
-    # Google Gemini Configuration (Free Tier)
-    GOOGLE_API_KEY: str
-    GEMINI_MODEL: str = "gemini-1.5-flash"  # Fast, free tier
-    GEMINI_EMBEDDING_MODEL: str = "models/embedding-001"  # 768 dimensions, free
+    # OpenRouter Configuration (for OpenAI Agents SDK)
+    OPENROUTER_API_KEY: str
+    OPENROUTER_MODEL: str = "gpt-4o-mini"
+    BASE_URL: str = "https://openrouter.ai/api/v1"
 
     # Qdrant Cloud Configuration
     QDRANT_URL: str
@@ -34,7 +34,7 @@ class Settings(BaseSettings):
 
     # CORS Configuration (comma-separated origins)
     # Add your frontend deploy URL here
-    CORS_ORIGINS: str = "http://localhost:3000,https://af1596ea.ai-robo-textbook.pages.dev/
+    CORS_ORIGINS: str = "http://localhost:3000,https://af1596ea.ai-robo-textbook.pages.dev/"
 
     # Rate Limiting
     RATE_LIMIT_PER_MINUTE: int = 10
@@ -46,7 +46,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        case_sensitive=True
+        case_sensitive=True,
+        extra="ignore"  # Ignore extra env vars (e.g., old Gemini config, JWT vars)
     )
 
     @property

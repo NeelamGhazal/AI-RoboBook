@@ -17,7 +17,7 @@ from app.api.v1.sessions import _in_memory_sessions
 
 logger = get_logger(__name__)
 
-router = APIRouter(prefix="/api/v1/chat", tags=["chat"])
+router = APIRouter(tags=["chat"])
 
 
 @router.get("/health")
@@ -32,9 +32,10 @@ async def chat_health():
         "status": "healthy",
         "message": "Chat router is loaded and accessible",
         "endpoints": {
-            "stream": "/api/v1/chat/stream",
-            "chat": "/api/v1/chat",
-            "history": "/api/v1/chat/history/{session_id}"
+            "stream": "POST /api/v1/chat/stream",
+            "chat": "POST /api/v1/chat",
+            "history": "GET /api/v1/chat/history/{session_id}",
+            "health": "GET /api/v1/chat/health"
         }
     }
 
@@ -112,7 +113,7 @@ async def chat(
             question=request.question,
             conversation_history=messages,
             selected_text=request.selected_text,
-            top_k=8,
+            top_k=3,
             stream=False,
         )
 
@@ -217,6 +218,33 @@ async def chat_stream(
             history_count=len(messages),
         )
 
+        # Validate and process selected_text (T021)
+        processed_selected_text = request.selected_text
+        if processed_selected_text:
+            original_length = len(processed_selected_text)
+
+            # Minimum length check (50 characters)
+            if original_length < 50:
+                logger.warning(
+                    "selected_text_too_short",
+                    length=original_length,
+                    minimum=50,
+                )
+                processed_selected_text = None  # Ignore if too short
+                print(f"[Backend] ⚠ Selected text too short ({original_length} chars, min 50) - ignoring")
+
+            # Maximum length check (500 characters, truncate if exceeded)
+            elif original_length > 500:
+                processed_selected_text = processed_selected_text[:500]
+                logger.info(
+                    "selected_text_truncated",
+                    original_length=original_length,
+                    truncated_length=500,
+                )
+                print(f"[Backend] ✂ Selected text truncated from {original_length} to 500 chars")
+            else:
+                print(f"[Backend] ✓ Selected text validated ({original_length} chars)")
+
         # Try to save user message (may fail if database unavailable)
         try:
             print("[Backend] Saving user message to database...")
@@ -248,8 +276,8 @@ async def chat_stream(
                 async for event in execute_rag_pipeline_stream(
                     question=request.question,
                     conversation_history=messages,
-                    selected_text=request.selected_text,
-                    top_k=8,
+                    selected_text=processed_selected_text,
+                    top_k=3,
                 ):
                     # Accumulate full response
                     if event["type"] == "token":

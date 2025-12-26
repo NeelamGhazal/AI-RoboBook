@@ -41,23 +41,68 @@ async def execute_rag_pipeline(
         # Stage 1: Vector Search & Retrieval
         retrieval_start = time.time()
 
-        chunks = await search_similar_chunks(
-            query=question,
-            top_k=top_k,
-            selected_text=selected_text,
-        )
+        # Check if user selected text
+        if selected_text:
+            # Selected text mode: Use selected text as PRIMARY context
+            logger.info(
+                "selected_text_mode",
+                question_length=len(question),
+                selected_text_length=len(selected_text),
+            )
+            print(f"[RAG] Selected text mode - using provided context ({len(selected_text)} chars)")
+            print(f"[RAG] Question: '{question}'")
+
+            # Create synthetic chunk from selected text
+            chunks = [{
+                "chunk_id": "selected_text",
+                "text": selected_text,
+                "chapter": "Selected Text",
+                "section": "User Selection",
+                "url": "#",
+                "confidence_score": 1.0,  # Maximum confidence for user-selected text
+            }]
+
+            # Optionally search for related content to supplement (but don't require it)
+            try:
+                related_chunks = await search_similar_chunks(
+                    query=question,
+                    top_k=2,  # Just 2 related chunks to supplement
+                    selected_text=None,  # Don't use hybrid search
+                )
+                if related_chunks:
+                    print(f"[RAG] Found {len(related_chunks)} related chunks to supplement")
+                    chunks.extend(related_chunks[:2])
+                else:
+                    print(f"[RAG] No related chunks found - using only selected text")
+            except Exception as e:
+                print(f"[RAG] Related search failed: {e} - using only selected text")
+                # Continue with just selected text
+
+            metadata["chunks_retrieved"] = len(chunks)
+            metadata["selected_text_used"] = True
+
+        else:
+            # General mode: Vector search only
+            chunks = await search_similar_chunks(
+                query=question,
+                top_k=top_k,
+                selected_text=None,
+            )
+
+            metadata["chunks_retrieved"] = len(chunks)
+            metadata["selected_text_used"] = False
+
+            # Only show error if NO selected text AND no search results
+            if not chunks:
+                logger.warning("no_chunks_retrieved", question_length=len(question))
+                return (
+                    "I couldn't find relevant information in the textbook to answer your question.",
+                    [],
+                    metadata
+                )
 
         retrieval_time = time.time() - retrieval_start
         metadata["retrieval_time_ms"] = int(retrieval_time * 1000)
-        metadata["chunks_retrieved"] = len(chunks)
-
-        if not chunks:
-            logger.warning("no_chunks_retrieved", question_length=len(question))
-            return (
-                "I couldn't find relevant information in the textbook to answer your question.",
-                [],
-                metadata
-            )
 
         # Stage 2: Build Citations
         citations = build_citations(chunks)
@@ -141,23 +186,69 @@ async def execute_rag_pipeline_stream(
         # Stage 1: Vector Search & Retrieval
         retrieval_start = time.time()
 
-        chunks = await search_similar_chunks(
-            query=question,
-            top_k=top_k,
-            selected_text=selected_text,
-        )
+        # Check if user selected text
+        if selected_text:
+            # Selected text mode: Use selected text as PRIMARY context
+            logger.info(
+                "selected_text_mode",
+                question_length=len(question),
+                selected_text_length=len(selected_text),
+            )
+            print(f"[RAG] Selected text mode - using provided context ({len(selected_text)} chars)")
+            print(f"[RAG] Question: '{question}'")
+
+            # Create synthetic chunk from selected text
+            chunks = [{
+                "chunk_id": "selected_text",
+                "text": selected_text,
+                "chapter": "Selected Text",
+                "section": "User Selection",
+                "url": "#",
+                "confidence_score": 1.0,  # Maximum confidence for user-selected text
+            }]
+
+            # Optionally search for related content to supplement (but don't require it)
+            try:
+                related_chunks = await search_similar_chunks(
+                    query=question,
+                    top_k=2,  # Just 2 related chunks to supplement
+                    selected_text=None,  # Don't use hybrid search
+                )
+                if related_chunks:
+                    print(f"[RAG] Found {len(related_chunks)} related chunks to supplement")
+                    chunks.extend(related_chunks[:2])
+                else:
+                    print(f"[RAG] No related chunks found - using only selected text")
+            except Exception as e:
+                print(f"[RAG] Related search failed: {e} - using only selected text")
+                # Continue with just selected text
+
+            metadata["chunks_retrieved"] = len(chunks)
+            metadata["selected_text_used"] = True
+
+        else:
+            # General mode: Vector search only
+            chunks = await search_similar_chunks(
+                query=question,
+                top_k=top_k,
+                selected_text=None,
+            )
+
+            metadata["chunks_retrieved"] = len(chunks)
+            metadata["selected_text_used"] = False
+
+            # Only show error if NO selected text AND no search results
+            if not chunks:
+                logger.warning("no_chunks_retrieved", question_length=len(question))
+                yield {
+                    "type": "token",
+                    "content": "I couldn't find relevant information in the textbook to answer your question."
+                }
+                yield {"type": "done"}
+                return
 
         retrieval_time = time.time() - retrieval_start
         metadata["retrieval_time_ms"] = int(retrieval_time * 1000)
-        metadata["chunks_retrieved"] = len(chunks)
-
-        if not chunks:
-            yield {
-                "type": "token",
-                "content": "I couldn't find relevant information in the textbook to answer your question."
-            }
-            yield {"type": "done"}
-            return
 
         # Stage 2: Build Citations
         citations = build_citations(chunks)

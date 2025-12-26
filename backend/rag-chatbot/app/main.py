@@ -8,8 +8,9 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from prometheus_client import make_asgi_app
+from openai import AsyncOpenAI
+from agents import set_default_openai_client
 from app.clients.db_client import db_client
-from app.clients.gemini_client import gemini_client
 from app.clients.local_embedding_client import local_embedding_client
 from app.clients.qdrant_client import qdrant_client
 from app.config import settings
@@ -35,11 +36,20 @@ async def lifespan(app: FastAPI):
         await local_embedding_client.initialize()
         logger.info("local_embedding_client_ready")
 
-        await gemini_client.initialize()
-        logger.info("gemini_client_ready")
-
         await qdrant_client.initialize()
         logger.info("qdrant_client_ready")
+
+        # Configure OpenRouter client for Agents SDK
+        openrouter_client = AsyncOpenAI(
+            api_key=settings.OPENROUTER_API_KEY,
+            base_url=settings.BASE_URL,
+        )
+        set_default_openai_client(openrouter_client)
+        logger.info(
+            "agents_sdk_configured",
+            model=settings.OPENROUTER_MODEL,
+            base_url=settings.BASE_URL,
+        )
 
         logger.info("application_started", environment="production")
     except Exception as e:
@@ -53,7 +63,6 @@ async def lifespan(app: FastAPI):
     try:
         await qdrant_client.close()
         await local_embedding_client.close()
-        await gemini_client.close()
         await db_client.disconnect()
         logger.info("application_shutdown_complete")
     except Exception as e:
@@ -170,13 +179,13 @@ async def health_check():
 
 # Import and register routers
 print("[Backend] Loading routers...")
-from app.api.v1 import sessions, chat_minimal
+from app.api.v1 import sessions, chat
 
 app.include_router(sessions.router)
 print("[Backend] ✓ Sessions router registered")
 
-app.include_router(chat_minimal.router, prefix="/api/v1/chat", tags=["chat"])
-print("[Backend] ✓ Minimal chat router registered: /api/v1/chat")
+app.include_router(chat.router, prefix="/api/v1/chat", tags=["chat"])
+print("[Backend] ✓ Chat router registered: /api/v1/chat")
 
 print("[Backend] Available endpoints:")
 print("[Backend] - POST /api/v1/chat/stream")

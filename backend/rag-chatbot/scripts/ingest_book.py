@@ -16,6 +16,11 @@ import re
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+env_path = Path(__file__).parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
 # Configuration from environment
 QDRANT_URL = os.getenv("QDRANT_URL", "https://9927c3c7-270d-4bf1-8fe6-0c2ceb37ac38.us-east4-0.gcp.cloud.qdrant.io:6333")
@@ -97,7 +102,7 @@ def extract_metadata(file_path: Path, docs_dir: Path) -> Dict[str, str]:
 
     if len(parts) >= 2:
         chapter = parts[0].replace("-", " ").title()
-        section_file = parts[-1].stem.replace("-", " ").title()
+        section_file = Path(parts[-1]).stem.replace("-", " ").title()
     else:
         chapter = "Introduction"
         section_file = file_path.stem.replace("-", " ").title()
@@ -186,12 +191,12 @@ def ingest_documents():
             print(f"  Created {len(chunks)} chunks")
 
             # Create points for each chunk
-            for chunk_idx, chunk_text in enumerate(chunks):
+            for chunk_idx, text_chunk in enumerate(chunks):
                 point_id = str(uuid.uuid4())
 
                 point = {
                     "id": point_id,
-                    "text": chunk_text,
+                    "text": text_chunk,
                     "metadata": {
                         **metadata,
                         "chunk_index": chunk_idx,
@@ -204,7 +209,9 @@ def ingest_documents():
             total_chunks += len(chunks)
 
         except Exception as e:
+            import traceback
             print(f"  ✗ Error processing file: {e}")
+            traceback.print_exc()
             continue
 
     print(f"\n{'=' * 70}")

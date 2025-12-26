@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 async def search_similar_chunks(
     query: str,
     top_k: int = 8,
-    score_threshold: float = 0.70,
+    score_threshold: float = 0.40,
     selected_text: Optional[str] = None,
 ) -> List[dict]:
     """
@@ -25,16 +25,18 @@ async def search_similar_chunks(
     Args:
         query: User's question
         top_k: Number of results to return (default 8)
-        score_threshold: Minimum similarity score (default 0.70)
+        score_threshold: Minimum similarity score (default 0.40)
         selected_text: Optional selected text for hybrid/filtered search
 
     Returns:
         List of chunks with scores and metadata
     """
-    with RETRIEVAL_DURATION.observe():
+    with RETRIEVAL_DURATION.time():
         try:
             # Generate embedding for query using local model
+            print(f"[VECTOR_SEARCH] Generating embedding for query: '{query}'")
             query_embedding = await local_embedding_client.generate_embedding(query)
+            print(f"[VECTOR_SEARCH] ✓ Embedding generated: {len(query_embedding)} dimensions, sample: {query_embedding[:3]}")
 
             # If selected_text provided, use hybrid approach
             # For MVP, we'll do weighted search (can enhance with filters later)
@@ -63,11 +65,26 @@ async def search_similar_chunks(
                 )
             else:
                 # Standard semantic search
+                print(f"[VECTOR_SEARCH] Searching Qdrant with threshold={score_threshold}, limit={top_k}")
                 results = await qdrant_client.search_similar(
                     query_vector=query_embedding,
                     limit=top_k,
                     score_threshold=score_threshold,
                 )
+                print(f"[VECTOR_SEARCH] ✓ Qdrant returned {len(results)} results")
+                if results:
+                    print(f"[VECTOR_SEARCH] Top scores: {[round(r.score, 3) for r in results[:3]]}")
+                else:
+                    print(f"[VECTOR_SEARCH] ⚠️ WARNING: No results! Trying with threshold=0.3...")
+                    # Debug: try lower threshold
+                    results_debug = await qdrant_client.search_similar(
+                        query_vector=query_embedding,
+                        limit=top_k,
+                        score_threshold=0.3,
+                    )
+                    print(f"[VECTOR_SEARCH] With threshold=0.3: {len(results_debug)} results")
+                    if results_debug:
+                        print(f"[VECTOR_SEARCH] 💡 SOLUTION: Lower score_threshold from {score_threshold} to 0.4")
 
                 logger.info(
                     "semantic_search_complete",
