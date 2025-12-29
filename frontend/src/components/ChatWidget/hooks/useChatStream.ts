@@ -44,16 +44,9 @@ export function useChatStream() {
       };
       addMessage(userMessage);
 
-      // Create placeholder for assistant message
+      // Track if we've created the assistant message yet
+      let assistantMessageCreated = false;
       const assistantMessageId = `assistant-${Date.now()}`;
-      const assistantMessage: Message = {
-        id: assistantMessageId,
-        role: 'assistant',
-        content: '',
-        timestamp: new Date(),
-        citations: [],
-      };
-      addMessage(assistantMessage);
 
       setIsStreaming(true);
 
@@ -78,7 +71,21 @@ export function useChatStream() {
                   fullResponse += event.content;
                   console.log('[ChatStream] Token added, full response length:', fullResponse.length);
                   console.log('[ChatStream] Current response preview:', fullResponse.substring(0, 50) + '...');
-                  updateLastMessage(fullResponse);
+
+                  // Create assistant message only when first token arrives
+                  if (!assistantMessageCreated) {
+                    const assistantMessage: Message = {
+                      id: assistantMessageId,
+                      role: 'assistant',
+                      content: fullResponse,
+                      timestamp: new Date(),
+                      citations: [],
+                    };
+                    addMessage(assistantMessage);
+                    assistantMessageCreated = true;
+                  } else {
+                    updateLastMessage(fullResponse);
+                  }
                 } else {
                   console.warn('[ChatStream] Token event missing content:', event);
                 }
@@ -89,7 +96,13 @@ export function useChatStream() {
                 if (event.citations) {
                   citations = event.citations;
                   console.log('[ChatStream] Citations received:', citations.length, 'sources');
-                  updateLastMessage(fullResponse, citations);
+
+                  // Only update if assistant message was created
+                  if (assistantMessageCreated) {
+                    updateLastMessage(fullResponse, citations);
+                  } else {
+                    console.warn('[ChatStream] Citations received but no message created yet');
+                  }
                 } else {
                   console.warn('[ChatStream] Citations event missing citations array:', event);
                 }
