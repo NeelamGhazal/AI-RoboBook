@@ -15,9 +15,9 @@ function getApiUrl(): string {
     return (window as any).CHAT_API_URL;
   }
 
-  // Fallback to localhost for development
-  // TODO: In production, set window.CHAT_API_URL or update this to production URL
-  return 'https://proud-nourishment-production-7f99.up.railway.app/';
+  // WSL backend IP (Windows can't reach WSL via localhost)
+  // For production, set window.CHAT_API_URL before loading the widget
+  return 'http://localhost:8000';  
 }
 
 /**
