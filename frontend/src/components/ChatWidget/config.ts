@@ -15,9 +15,9 @@ function getApiUrl(): string {
     return (window as any).CHAT_API_URL;
   }
 
-  // WSL backend IP (Windows can't reach WSL via localhost)
-  // For production, set window.CHAT_API_URL before loading the widget
-  return 'http://localhost:8000';  
+  // Production: Hugging Face Spaces backend
+  // For local development, set window.CHAT_API_URL = 'http://localhost:8000'
+  return 'https://neelumghazal-phyai-rag-chatbot-backend.hf.space';  
 }
 
 /**
