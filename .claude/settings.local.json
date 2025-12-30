@@ -3,7 +3,20 @@
     "allow": [
       "WebSearch",
       "Bash(git commit:*)",
-      "Bash(npm install fs-extra)"
+      "Bash(npm install fs-extra)",
+      "Bash(chmod:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)",
+      "Bash(git remote remove:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(cd:*)",
+      "Bash(npm run build:*)",
+      "Bash(vercel:*)"
     ],
     "deny": [],
     "ask": []

@@ -33,8 +33,8 @@ class Settings(BaseSettings):
     API_RELOAD: bool = False
 
     # CORS Configuration (comma-separated origins)
-    # Add your frontend deploy URL here
-    CORS_ORIGINS: str = "http://localhost:3000,https://af1596ea.ai-robo-textbook.pages.dev/"
+    # Production frontend URLs + local development
+    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173,https://phyai-humanoid-textbook.vercel.app"
 
     # Rate Limiting
     RATE_LIMIT_PER_MINUTE: int = 10

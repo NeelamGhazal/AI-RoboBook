@@ -203,10 +203,11 @@ print("[Backend] ===================================\n")
 metrics_app = make_asgi_app()
 app.mount("/metrics", metrics_app)
 
-# =============== RAILWAY-FRIENDLY STARTUP BLOCK ===============
+# =============== PLATFORM-FRIENDLY STARTUP BLOCK ===============
 if __name__ == "__main__":
-    # Railway automatically sets PORT env variable
-    port = int(os.environ.get("PORT", 8000))  # fallback 8000 for local dev
+    # HF Spaces uses PORT=7860, Railway sets PORT dynamically
+    # Fallback to 8000 for local development
+    port = int(os.environ.get("PORT", 8000))
     uvicorn.run(
         "app.main:app",
         host="0.0.0.0",
