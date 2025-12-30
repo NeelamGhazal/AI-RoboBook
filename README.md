@@ -1,19 +1,32 @@
 # 🤖 PhyAI Humanoid Textbook
 
 > **AI-Powered Interactive Learning Platform for Humanoid Robotics**
-> Built with React, FastAPI, and OpenRouter LLM - Zero-Cost Embeddings, Production-Ready RAG
+> Built with Docusaurus, FastAPI, and OpenRouter LLM - Educational Content Creation with Embedded RAG Chatbot
 
-[![React](https://img.shields.io/badge/React-18.3-61dafb?logo=react&logoColor=white)](https://reactjs.org/)
+[![Docusaurus](https://img.shields.io/badge/Docusaurus-3.6-3ECC5F?logo=docusaurus&logoColor=white)](https://docusaurus.io/)
+[![Vercel](https://img.shields.io/badge/Vercel-Production-000000?logo=vercel&logoColor=white)](https://vercel.com/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Qdrant](https://img.shields.io/badge/Qdrant-1.16-DC244C?logo=qdrant&logoColor=white)](https://qdrant.tech/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)](https.postgresql.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)](https://postgresql.org/)
 [![OpenRouter](https://img.shields.io/badge/OpenRouter-LLM-7C3AED?logo=openai&logoColor=white)](https://openrouter.ai/)
 
 ---
 
 ## 📚 Overview
 
-**PhyAI Humanoid Textbook** is a production-ready educational platform combining a comprehensive humanoid robotics textbook with an intelligent RAG (Retrieval-Augmented Generation) chatbot. Students can read content AND ask questions about it in real-time with **streaming responses, citations, and context-aware explanations**.
+**PhyAI Humanoid Textbook** is a dual-purpose educational platform that combines:
+
+1. **AI-Driven Educational Content Creation**: A Docusaurus-based technical textbook for humanoid robotics, created using Spec-Kit Plus and Claude Code workflow for systematic content development
+2. **Embedded RAG Chatbot**: An intelligent Q&A system with streaming responses, citations, and context-aware explanations integrated directly into the learning experience
+
+### 📖 Textbook Modules
+
+The platform covers four comprehensive modules on humanoid robotics:
+
+- **Module 1: ROS 2 Fundamentals** - Architecture, nodes, topics, services, and actions
+- **Module 2: Robot Simulation** - Gazebo, physics engines, sensor modeling
+- **Module 3: NVIDIA Isaac** - Isaac Sim, Isaac Gym, reinforcement learning
+- **Module 4: Voice Control** - Speech recognition, NLP, voice commands for robots
 
 ### 🎯 Key Features
 
@@ -23,7 +36,8 @@
 ✅ **Session Persistence** - Conversation history saved across page reloads
 ✅ **100% Free Embeddings** - Local sentence-transformers (no API costs)
 ✅ **Free LLM Tier** - OpenRouter with mistralai/devstral-2512:free
-✅ **Windows + WSL Support** - Works seamlessly on Windows development machines
+✅ **Docusaurus MDX** - Rich interactive documentation with React components
+✅ **Spec-Kit Plus Workflow** - AI-driven content specification and creation
 ✅ **Production Ready** - PostgreSQL, Qdrant Cloud, structured logging, Prometheus metrics
 
 ---
@@ -33,37 +47,39 @@
 ### System Overview
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    FRONTEND (React)                      │
-│  • Chat Widget (streaming SSE)                          │
-│  • Selected Text Detection                              │
-│  • Citation Display                                     │
-│  • Session Management                                   │
-└────────────────┬────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│              FRONTEND (Docusaurus Site - Vercel)                │
+│  • Educational Content (docs/ folder with 4 modules)            │
+│  • MDX Support (Markdown + React Components)                    │
+│  • Embedded Chat Widget (streaming SSE)                         │
+│  • Selected Text Detection                                      │
+│  • Citation Display                                             │
+│  • Session Management                                           │
+└────────────────┬────────────────────────────────────────────────┘
                  │ HTTP/SSE
-┌────────────────▼────────────────────────────────────────┐
-│              BACKEND (FastAPI)                          │
-│  • REST API Endpoints                                   │
-│  • RAG Pipeline Orchestration                           │
-│  • Server-Sent Events Streaming                         │
-│  • Session & Message CRUD                               │
-└─┬──────────┬──────────┬──────────────┬─────────────────┘
+┌────────────────▼────────────────────────────────────────────────┐
+│         BACKEND (FastAPI - HuggingFace Spaces)                  │
+│  • REST API Endpoints                                           │
+│  • RAG Pipeline Orchestration                                   │
+│  • Server-Sent Events Streaming                                 │
+│  • Session & Message CRUD                                       │
+└─┬──────────┬──────────┬──────────────┬───────────────────────────┘
   │          │          │              │
-  │ Postgres │  Qdrant  │  OpenRouter  │  Sentence
-  │          │  Cloud   │  (LiteLLM)   │  Transformers
+  │ Neon     │  Qdrant  │  OpenRouter  │  Sentence
+  │ Postgres │  Cloud   │  (LiteLLM)   │  Transformers
   │          │          │              │  (Local)
   │          │          │              │
-  └──────────┴──────────┴──────────────┴─────────────────┘
+  └──────────┴──────────┴──────────────┴───────────────────────────┘
 ```
 
 ### RAG Data Flow
 
 ```
-User Question
+User Question (from embedded chat widget)
     ↓
 Local Embeddings (sentence-transformers, FREE)
     ↓
-Vector Search (Qdrant Cloud, 913 chunks)
+Vector Search (Qdrant Cloud, 913 textbook chunks)
     ↓
 Context Building (with conversation history)
     ↓
@@ -78,28 +94,37 @@ Citations + Metadata
 
 ## 🛠️ Technology Stack
 
-### Frontend
+### Frontend (Docusaurus Site)
 
-| Technology | Purpose |
-|------------|---------|
-| **React 18.3** | UI framework with hooks |
-| **TypeScript 5.0** | Type-safe development |
-| **Tailwind CSS 3.4** | Utility-first styling |
-| **Vite** | Build tool & dev server |
-| **React Router** | Client-side routing |
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Docusaurus** | 3.6 | Static site generator for educational content |
+| **Vercel** | Latest | Production hosting with CDN |
+| **MDX** | 3.1 | Markdown with React components |
+| **TypeScript** | 5.0 | Type-safe development |
+| **Tailwind CSS** | 3.4 | Utility-first styling for chat widget |
+| **React 18.3** | 18.3 | UI components and chat widget |
 
-### Backend
+### Backend (FastAPI Server)
 
-| Technology | Purpose |
-|------------|---------|
-| **FastAPI 0.115** | Async Python web framework |
-| **PostgreSQL** (asyncpg) | Session & message storage |
-| **Qdrant Cloud 1.16** | Vector database (913 chunks) |
-| **Sentence-Transformers** | **Local embeddings (100% free!)** |
-| **OpenAI Agents SDK** | LLM orchestration |
-| **LiteLLM** | **OpenRouter integration** |
-| **Structlog** | Structured JSON logging |
-| **Prometheus** | Metrics & monitoring |
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **FastAPI** | 0.115 | Async Python web framework |
+| **Neon PostgreSQL** | asyncpg 0.29 | Serverless session & message storage |
+| **Qdrant Cloud** | 1.16 | Vector database (913 chunks) |
+| **Sentence-Transformers** | 3.0.1 | **Local embeddings (100% free!)** |
+| **OpenAI Agents SDK** | 0.6.0 | LLM orchestration and streaming |
+| **LiteLLM** | 1.80.11 | **OpenRouter integration** |
+| **Structlog** | 24.4.0 | Structured JSON logging |
+| **Prometheus** | 0.17.0 | Metrics & monitoring |
+
+### Development Tools
+
+| Tool | Purpose |
+|------|---------|
+| **Spec-Kit Plus** | AI-driven content specification workflow |
+| **Claude Code** | Automated development and content creation |
+| **Git** | Version control and branch-based development |
 
 ---
 
@@ -109,7 +134,7 @@ Citations + Metadata
 
 - **Node.js 18+** and npm
 - **Python 3.11+**
-- **PostgreSQL** (local or cloud)
+- **Neon PostgreSQL** account (serverless, free tier available)
 - **Qdrant Cloud** account (free tier available)
 - **OpenRouter API key** (free tier available)
 
@@ -120,7 +145,7 @@ git clone <repository-url>
 cd phyai-humanoid-textbook
 ```
 
-### 2. Backend Setup
+### 2. Backend Setup (FastAPI)
 
 ```bash
 cd backend/rag-chatbot
@@ -134,8 +159,8 @@ pip install -r requirements.txt
 
 # Create .env file
 cat > .env << EOF
-# Database
-DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/phyai_textbook
+# Neon Serverless PostgreSQL
+NEON_DATABASE_URL=postgresql://user:pass@endpoint.neon.tech/dbname?sslmode=require
 
 # Qdrant Cloud
 QDRANT_URL=https://your-cluster.cloud.qdrant.io:6333
@@ -145,9 +170,10 @@ QDRANT_COLLECTION_NAME=textbook_chunks
 # OpenRouter LLM (Free Tier)
 OPENROUTER_API_KEY=sk-or-v1-your-key-here
 OPENROUTER_MODEL=mistralai/devstral-2512:free
+BASE_URL=https://openrouter.ai/api/v1
 
-# CORS
-CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+# CORS (include your Vercel production URL)
+CORS_ORIGINS=http://localhost:3000,https://your-site.vercel.app
 EOF
 
 # Start backend
@@ -157,7 +183,7 @@ python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 **Backend runs on:** http://localhost:8000
 **API docs:** http://localhost:8000/docs
 
-### 3. Frontend Setup
+### 3. Frontend Setup (Docusaurus)
 
 ```bash
 cd frontend
@@ -165,16 +191,46 @@ cd frontend
 # Install dependencies
 npm install
 
-# Create .env.local file
-echo "VITE_API_URL=http://localhost:8000" > .env.local
-
-# Start development server
-npm run dev
+# Start Docusaurus development server
+npm start
 ```
 
 **Frontend runs on:** http://localhost:3000
 
-### 4. Verify Setup
+**Docusaurus Site Structure:**
+```
+frontend/
+├── docs/                      # Educational content
+│   ├── module1-ros2/          # ROS 2 Fundamentals
+│   ├── module2-simulation/    # Robot Simulation
+│   ├── module3-isaac/         # NVIDIA Isaac
+│   └── module4-voice/         # Voice Control
+├── src/
+│   ├── components/ChatWidget/ # Embedded RAG chatbot
+│   ├── pages/                 # Custom pages
+│   └── theme/
+│       └── Root.tsx           # Chat widget injection point
+├── docusaurus.config.js       # Site configuration
+└── sidebars.js                # Navigation structure
+```
+
+### 4. Deploy to Production
+
+**Frontend (Vercel):**
+```bash
+cd frontend
+npm run build              # Build Docusaurus site
+vercel --prod              # Deploy to Vercel
+```
+
+**Backend (HuggingFace Spaces):**
+```bash
+cd backend/rag-chatbot
+# Follow HUGGINGFACE_DEPLOYMENT.md for detailed instructions
+# Push to HF Spaces repository with Dockerfile
+```
+
+### 5. Verify Setup
 
 **Backend Health:**
 ```bash
@@ -182,7 +238,7 @@ curl http://localhost:8000/health
 # Expected: {"status": "healthy", "dependencies": {...}}
 ```
 
-**Test Chat:**
+**Test Chat API:**
 ```bash
 curl -X POST "http://localhost:8000/api/v1/chat/stream" \
   -H "Content-Type: application/json" \
@@ -190,11 +246,12 @@ curl -X POST "http://localhost:8000/api/v1/chat/stream" \
 # Expected: Streaming SSE response with answer
 ```
 
-**Frontend:**
+**Frontend (Docusaurus Site):**
 1. Open http://localhost:3000
-2. Click chat icon (bottom right)
-3. Ask: "What is ROS 2?"
-4. Should see streaming response with citations
+2. Navigate to any module documentation
+3. Click chat icon (bottom right)
+4. Ask: "What is ROS 2?"
+5. Should see streaming response with citations
 
 ---
 
@@ -218,7 +275,7 @@ conventions that facilitate robotics development...
 
 ### Selected Text Q&A
 
-1. **Select text** from the textbook (50-500 characters)
+1. **Select text** from the Docusaurus textbook (50-500 characters)
 2. **"Ask about this" button** appears above selection
 3. **Click button** → Chat opens with context loaded
 4. **Ask:** "explain this" or "what does this mean?"
@@ -273,7 +330,7 @@ Every response includes:
 
 ### 4. Session Persistence
 
-- **Storage:** PostgreSQL database
+- **Storage:** Neon Serverless PostgreSQL database
 - **Recovery:** Auto-recovery on backend restart
 - **History:** Last 12 messages included in context
 - **Stateless:** Frontend can resume any session by ID
@@ -286,8 +343,8 @@ Every response includes:
 
 **Backend (.env):**
 ```bash
-# Database
-DATABASE_URL=postgresql+asyncpg://user:pass@host:5432/dbname
+# Neon Serverless PostgreSQL
+NEON_DATABASE_URL=postgresql://user:pass@endpoint.neon.tech/dbname?sslmode=require
 
 # Qdrant Cloud
 QDRANT_URL=https://xxx.cloud.qdrant.io:6333
@@ -297,15 +354,16 @@ QDRANT_COLLECTION_NAME=textbook_chunks
 # OpenRouter LLM
 OPENROUTER_API_KEY=sk-or-v1-xxx
 OPENROUTER_MODEL=mistralai/devstral-2512:free
+BASE_URL=https://openrouter.ai/api/v1
 
-# CORS
-CORS_ORIGINS=http://localhost:3000
+# CORS (include Vercel production URL)
+CORS_ORIGINS=http://localhost:3000,https://your-site.vercel.app
 ```
 
-**Frontend (.env.local):**
-```bash
-VITE_API_URL=http://localhost:8000
-```
+**Frontend (Docusaurus):**
+- **Chat widget API URL** is configured in `src/components/ChatWidget/config.ts`
+- **Production URL** is set to HuggingFace Spaces backend by default
+- **Local development** can override by setting `window.CHAT_API_URL = 'http://localhost:8000'`
 
 ### Windows + WSL Setup
 
@@ -315,6 +373,49 @@ If running backend on WSL and frontend on Windows:
 2. Update `frontend/src/components/ChatWidget/config.ts`:
 ```typescript
 return 'http://172.25.218.26:8000';  // Replace with your WSL IP
+```
+
+---
+
+## 🧑‍💻 Development Workflow
+
+### Spec-Kit Plus & Claude Code Integration
+
+This project uses **Spec-Kit Plus** and **Claude Code** for systematic content development:
+
+1. **Content Specification**: Create structured specs for each module using Spec-Kit Plus templates
+2. **AI-Driven Creation**: Use Claude Code to generate educational content following specifications
+3. **Iterative Refinement**: Review and refine content with AI assistance
+4. **Quality Assurance**: Validate content accuracy and educational value
+5. **Vector Ingestion**: Process finalized content into Qdrant for RAG retrieval
+
+### Content Ingestion Pipeline
+
+**Step 1: Write Content in Docusaurus**
+```bash
+# Add new educational content to docs/
+docs/module1-ros2/chapter1-intro.md
+```
+
+**Step 2: Process Content for RAG**
+```bash
+cd backend/rag-chatbot
+python scripts/ingest_book.py --input ../../frontend/docs --collection textbook_chunks
+```
+
+**Step 3: Verify Ingestion**
+```bash
+# Check Qdrant collection stats
+python scripts/check_qdrant.py
+# Expected: Shows chunk count, embeddings dimension
+```
+
+**Step 4: Test RAG Retrieval**
+```bash
+# Test query through API
+curl -X POST "http://localhost:8000/api/v1/chat/stream" \
+  -H "Content-Type: application/json" \
+  -d '{"session_id": "test", "question": "Your test question about new content"}'
 ```
 
 ---
@@ -371,20 +472,33 @@ data: {"type": "done"}
 
 ```
 phyai-humanoid-textbook/
-├── frontend/
+├── frontend/                          # Docusaurus Site
+│   ├── docs/                          # Educational content (MDX)
+│   │   ├── module1-ros2/              # ROS 2 Fundamentals
+│   │   │   ├── chapter1-intro.md
+│   │   │   ├── chapter2-nodes.md
+│   │   │   └── ...
+│   │   ├── module2-simulation/        # Robot Simulation
+│   │   ├── module3-isaac/             # NVIDIA Isaac
+│   │   └── module4-voice/             # Voice Control
 │   ├── src/
 │   │   ├── components/
-│   │   │   └── ChatWidget/
+│   │   │   └── ChatWidget/            # Embedded RAG chatbot
 │   │   │       ├── ChatWidget.tsx
 │   │   │       ├── components/
 │   │   │       ├── hooks/
 │   │   │       ├── api/
+│   │   │       ├── config.ts
 │   │   │       └── types.ts
 │   │   ├── pages/
-│   │   └── App.tsx
+│   │   └── theme/
+│   │       └── Root.tsx               # Chat widget injection
+│   ├── docusaurus.config.js           # Site configuration
+│   ├── sidebars.js                    # Navigation structure
+│   ├── vercel.json                    # Vercel deployment config
 │   └── package.json
 │
-├── backend/rag-chatbot/
+├── backend/rag-chatbot/               # FastAPI Backend
 │   ├── app/
 │   │   ├── api/v1/
 │   │   │   ├── chat.py
@@ -400,14 +514,36 @@ phyai-humanoid-textbook/
 │   │   │   └── local_embedding_client.py
 │   │   ├── db/
 │   │   │   └── crud.py
+│   │   ├── config.py
 │   │   └── main.py
 │   ├── scripts/
-│   │   ├── ingest_book.py
+│   │   ├── ingest_book.py             # Content ingestion pipeline
 │   │   └── init_qdrant.py
-│   └── requirements.txt
+│   ├── Dockerfile                     # HF Spaces deployment
+│   ├── requirements.txt
+│   └── HUGGINGFACE_DEPLOYMENT.md
+│
+├── .specify/                          # Spec-Kit Plus templates
+│   └── memory/constitution.md
 │
 └── README.md
 ```
+
+---
+
+## 🌐 Live Deployments
+
+| Component | Platform | URL | Test Instructions |
+|-----------|----------|-----|-------------------|
+| **Frontend (Docusaurus)** | Vercel | `https://phyai-humanoid-textbook.vercel.app` | 1. Open URL<br>2. Navigate to any module<br>3. Click chat icon (bottom right) |
+| **Backend (FastAPI)** | HuggingFace Spaces | `https://neelumghazal-phyai-rag-chatbot-backend.hf.space` | 1. Open `/docs` endpoint<br>2. Test `/health` endpoint<br>3. Try POST to `/api/v1/chat/stream` |
+
+**End-to-End Test:**
+1. Visit Vercel frontend
+2. Select text from any module (50+ characters)
+3. Click "Ask about this" button
+4. Ask a question in the chat
+5. Verify streaming response with citations
 
 ---
 
@@ -415,14 +551,18 @@ phyai-humanoid-textbook/
 
 ### ✅ Completed
 
+- [x] Docusaurus-based educational content platform
 - [x] RAG chatbot with streaming responses
 - [x] Selected text Q&A feature
 - [x] Citation system with confidence scores
-- [x] Session persistence
+- [x] Session persistence with Neon PostgreSQL
 - [x] Windows + WSL support
 - [x] Free embeddings (local sentence-transformers)
 - [x] Free LLM tier (OpenRouter)
 - [x] Production logging & metrics
+- [x] Vercel deployment for frontend
+- [x] HuggingFace Spaces deployment for backend
+- [x] Spec-Kit Plus integration for content workflow
 
 ### 🔜 Coming Soon
 
@@ -433,6 +573,7 @@ phyai-humanoid-textbook/
 - [ ] Advanced search (semantic + keyword)
 - [ ] Quiz generation from content
 - [ ] Progress tracking dashboard
+- [ ] Interactive code examples with live execution
 
 ---
 
@@ -452,6 +593,7 @@ Contributions welcome! Please:
 
 **Python:** PEP 8, type hints, docstrings
 **TypeScript:** ESLint + Prettier, functional components
+**MDX:** Clear headings, consistent formatting, educational tone
 
 ---
 
@@ -465,39 +607,66 @@ This project is licensed under the **MIT License**.
 
 Built with amazing open-source technologies:
 
-- **React** - UI framework
-- **FastAPI** - Python web framework
-- **Qdrant** - Vector database
-- **Sentence Transformers** - Embedding models
-- **OpenAI Agents SDK** - LLM orchestration
+- **Docusaurus** - Modern static site generator for documentation
+- **Vercel** - Seamless deployment and hosting platform
+- **MDX** - Markdown with React components
+- **React** - UI framework for interactive components
+- **FastAPI** - High-performance Python web framework
+- **Qdrant** - Vector database for semantic search
+- **Sentence Transformers** - Local embedding models
+- **OpenAI Agents SDK** - LLM orchestration and streaming
 - **LiteLLM** - Multi-provider LLM proxy
-- **PostgreSQL** - Database
-- **Tailwind CSS** - Styling
+- **Neon** - Serverless PostgreSQL database
+- **Tailwind CSS** - Utility-first styling framework
+- **Spec-Kit Plus** - AI-driven content specification workflow
+- **Claude Code** - Automated development and content creation
 
 ---
 
 ## 📞 Support
 
-- **Documentation:** See `backend/rag-chatbot/BACKEND_ARCHITECTURE_REPORT.md`
-- **Setup Help:** See `backend/rag-chatbot/START_COMMANDS.md`
+- **Deployment Guides:**
+  - Frontend: See `frontend/VERCEL_DEPLOYMENT.md`
+  - Backend: See `backend/rag-chatbot/HUGGINGFACE_DEPLOYMENT.md`
+- **Architecture:** See `backend/rag-chatbot/HF_DEPLOYMENT_ARCHITECTURE.md`
+- **Backend Details:** See `backend/rag-chatbot/BACKEND_ARCHITECTURE_REPORT.md`
 - **Issues:** Open a GitHub issue with detailed info
 - **Questions:** Check existing issues or create a new one
 
 ---
 
-## 🏆 Highlights
+## 🏆 Project Highlights
 
-✅ **100% Free Embeddings** - No API costs for retrieval
-✅ **Free LLM Tier** - mistralai/devstral-2512:free
-✅ **Production Ready** - PostgreSQL, Qdrant, metrics
-✅ **Well Documented** - Comprehensive guides included
+### Dual Objectives Achieved
+
+**1. AI-Driven Educational Content Creation**
+- ✅ Systematic content specification using Spec-Kit Plus workflow
+- ✅ Claude Code integration for AI-assisted content development
+- ✅ Docusaurus platform for rich, interactive documentation
+- ✅ MDX support for combining Markdown with React components
+- ✅ Modular structure for scalable educational content
+
+**2. Embedded RAG Chatbot System**
+- ✅ **100% Free Embeddings** - No API costs for retrieval (sentence-transformers)
+- ✅ **Free LLM Tier** - mistralai/devstral-2512:free via OpenRouter
+- ✅ **Production Infrastructure** - Neon PostgreSQL + Qdrant Cloud
+- ✅ **Professional Development** - Structured logging, metrics, health checks
+- ✅ **Seamless Integration** - Chat widget embedded in every documentation page
+
+### Technical Excellence
+
+- 🚀 **Modern Stack**: Docusaurus 3.6, FastAPI 0.115, OpenAI Agents SDK 0.6
+- 🌐 **Cloud-Native**: Vercel (frontend) + HuggingFace Spaces (backend)
+- 💰 **Cost-Optimized**: Local embeddings + free LLM tier = minimal operational costs
+- 📊 **Well-Documented**: Comprehensive guides for deployment and architecture
+- 🔒 **Production-Ready**: Security headers, CORS, health checks, monitoring
 
 ---
 
 <div align="center">
 
-**Built for education, powered by open source** 🚀
+**Built for education, powered by open source, enhanced by AI** 🚀
 
-*Making AI-powered learning accessible to everyone*
+*Making AI-powered learning accessible to everyone through systematic content creation and intelligent assistance*
 
 </div>
