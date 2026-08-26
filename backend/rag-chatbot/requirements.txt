@@ -4,7 +4,7 @@ python-multipart==0.0.9
 pydantic>=2.12.3
 pydantic-settings>=2.5.2
 openai>=2.9.0
-openai-agents>=0.6.0
+openai-agents>=0.18.1
 litellm==1.80.11
 tiktoken==0.7.0
 qdrant-client==1.16.2
