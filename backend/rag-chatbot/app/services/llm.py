@@ -51,7 +51,7 @@ Answer the user's question based on the textbook excerpts provided in their mess
 RAG_AGENT = Agent(
     name="TextbookRAGAgent",
     model=LitellmModel(
-        model="openrouter/mistralai/devstral-2512:free",  # Free OpenRouter model with provider prefix
+        model="openrouter/z-ai/glm-5.2:free",  # Free OpenRouter model with provider prefix
     ),
     instructions=SYSTEM_PROMPT,
     tools=[],
