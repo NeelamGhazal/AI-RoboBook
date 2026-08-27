@@ -302,6 +302,11 @@ async def generate_response_stream(
                         # Output is a list of ResponseOutputMessage objects
                         if isinstance(output_content, list):
                             for content_block in output_content:
+                                # Skip reasoning/thinking blocks (e.g. Nemotron chain-of-thought) -
+                                # only stream the final "message" output, not internal reasoning
+                                if getattr(content_block, "type", None) == "reasoning":
+                                    continue
+
                                 # ResponseOutputMessage has a 'content' field with text blocks
                                 if hasattr(content_block, "content"):
                                     content_field = content_block.content
